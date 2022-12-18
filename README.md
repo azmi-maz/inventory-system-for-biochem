@@ -1,7 +1,5 @@
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/azmi-maz/inventory-system-for-biochem/main)
 
-![barcode](https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif)
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -9,22 +7,17 @@
     <img src="https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Biochemistry Inventory System</h3>
 
   <p align="center">
     project_description
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/azmi-maz/inventory-system-for-biochem"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://docs.google.com/spreadsheets/d/1DA_8fUuL4t9OM61inJ-E4ElOMapTTt7QdZHvUHDeBkk/edit?usp=share_link">View Demo</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -58,9 +51,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+This inventory system was made to handle our stock-in and stock-out processes faster using GS1 data matrix of the Abbott Alinity reagents and consumables.
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Main features:
+* Dashboard to see in-stock reagents, recent stock transactions, expired reagents, pending purchase requested reagents, and below-par-level reagents.
+* Calculates the reorder quantity automatically based on the stock transaction tables to prevent understocking and reduce overstocking.
+* Produces statistical reports for monthly and annual reports.
+* Facilitates communication by producing reports between laboratory users, the procurement team, and suppliers on active purchase orders.
+
+
+Use the `BLANK_README.md` to get started.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -68,14 +68,8 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+* ![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,32 +78,18 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+1. Create a google sheet
+2. Install Google Apps Script GitHub Assistant extension
+3. Clone this repo
+4. Login to GitHub using the extension with you GitHub token
+5. Pull the main branch
+
+### Google sheets needed
+
+1. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
