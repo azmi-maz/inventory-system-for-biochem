@@ -5,7 +5,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/azmi-maz/inventory-system-for-biochem">
-    <img src="[images/logo.png](https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FData_Matrix&psig=AOvVaw0pK2LMV9_tBfiqF4h94nQf&ust=1671464051084000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNjKgPq-g_wCFQAAAAAdAAAAABAE)" alt="Logo" width="80" height="80">
+    <img src="![barcode](https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif)
+" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">project_title</h3>
