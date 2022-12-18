@@ -1,12 +1,11 @@
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/azmi-maz/inventory-system-for-biochem/main)
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/azmi-maz/inventory-system-for-biochem">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="[images/logo.png](https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FData_Matrix&psig=AOvVaw0pK2LMV9_tBfiqF4h94nQf&ust=1671464051084000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNjKgPq-g_wCFQAAAAAdAAAAABAE)" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">project_title</h3>
