@@ -10,7 +10,6 @@
 <h3 align="center">Biochemistry Inventory System</h3>
 
   <p align="center">
-    project_description
     <br />
     <a href="https://github.com/azmi-maz/inventory-system-for-biochem"><strong>Explore the docs »</strong></a>
     <br />
