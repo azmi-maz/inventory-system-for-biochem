@@ -91,7 +91,7 @@ This project must be accompanied by another google sheet to allow external users
 <br />
 **restricted - hidden sheet
 
-| Sheet Name | User restriction |
+| Sheet Name | User Restriction |
 | ----------- | ----------- |
 | Dashboard | * |
 | INCOMING |  |
