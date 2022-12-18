@@ -32,16 +32,13 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="#google-sheets-needed">Google sheets needed/a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -77,6 +74,9 @@ Use the `BLANK_README.md` to get started.
 <!-- GETTING STARTED -->
 ## Getting Started
 
+This project must be accompanied by another google sheet to allow external users to view/interact with the inventory system.
+<br />
+<a href="https://github.com/azmi-maz/supplier-view-inventory-system><strong>See repo here»</strong></a>
 
 ### Installation
 
@@ -89,7 +89,13 @@ Use the `BLANK_README.md` to get started.
 ### Google sheets needed
 
 *limited - User interacts with protected sheet
+<br />
 **restricted - hidden sheet
+
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
 
 * Dashboard*
 * INCOMING
@@ -145,7 +151,8 @@ Note: to document formulas used in each sheets
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-INCOMING - scan the item barcode one row at a time and click the "ADD" button.
+INCOMING - scan the item barcode one row at a time and click the "Add" button.
+<br />
 OUTGOING - Choose the item by checking the checkbox and click "Stock out" button.
 
 Note: to continue documentation as user guide.
@@ -157,13 +164,20 @@ Note: to continue documentation as user guide.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Incoming and Outgoing sheets
-- [ ] Calculated sheets to show quantity on hand items
-- [ ] Statistics
-- [ ] Purchase requests and order
-- [ ] Others
+- [ ] Stock-in and stock-out processes can be done with barcding or manually (for items that are not barcoded).
+- [ ] Query quantity on hand for purchase request items and FOC.
+- [ ] Reagent verification list is auto-populated during stock-in process.
+- [ ] Produce department stock requistion forms.
+- [ ] Purchase requests and order features:
+    - [ ] Query list of received items to ease data entry for user.
+    - [ ] Query critical items that are below par level.
+    - [ ] Autocalculates reorder stock quantity for need-to-order items.
+- [ ] Statistics:
+    - [ ] Test count to calculate the test usage - average per month (APM).
+    - [ ] Finance data, for monthly and annual report.
+- [ ] Dashboard to keep track of the important stuff.
 
-See the [open issues](https://github.com/azmi-maz/inventory-system-for-biochem/issues) for a full list of proposed features (and known issues).
+<!-- See the [open issues](https://github.com/azmi-maz/inventory-system-for-biochem/issues) for a full list of proposed features (and known issues). -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
