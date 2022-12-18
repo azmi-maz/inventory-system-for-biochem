@@ -93,54 +93,51 @@ This project must be accompanied by another google sheet to allow external users
 <br />
 **restricted - hidden sheet
 
-| Syntax | Description |
+| Sheet Name | User restriction |
 | ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-
-* Dashboard*
-* INCOMING
-* OUTGOING
-* MANUAL
-* Verification
-* IN LIST*
-* OUT LIST*
-* QOH PR*
-* QOH FOC*
-* tblStockIN**
-* tblUniqueINID**
-* tblStockOUT**
-* Store_Alinity*
-* EXPIRED*
-* Cold_Items*
-* Store-PR*
-* Store-FOC*
-* BO-QOH<MTH*
-* To PR
-* Order PR
-* Ves-Correct*
-* VExcel
-* Order FOC
-* PO Entry
-* DO Entry
-* Batch List
-* tblPR**
-* tblPO**
-* tblDO**
-* MasterL**
-* tblBatch**
-* tblBestExp**
-* Statistics*
-* TestCountEntry
-* Alinity_Count
-* FOC-NonAbbott
-* CountComp**
-* Test_Count Data**
-* FOCNonAbbott Data**
-* FOCNonAbbottComp**
-* Pivots**
-* ItemCodeL**
-* Correct REQ*
+| Dashboard | * |
+| INCOMING |  |
+| OUTGOING |  |
+| MANUAL |  |
+| Verification | | 
+| IN LIST | * |
+| OUT LIST | * |
+| QOH PR | * |
+| QOH FOC | * |
+| tblStockIN | ** |
+| tblUniqueINID | ** |
+| tblStockOUT | ** |
+| Store_Alinity | * |
+| EXPIRED | * |
+| Cold_Items | * |
+| Store-PR | * |
+| Store-FOC | * |
+| BO-QOH<MTH | * |
+| To PR |  |
+| Order PR |  |
+| Ves-Correct | *
+| VExcel | 
+| Order FOC | 
+| PO Entry | 
+| DO Entry | 
+| Batch List | 
+| tblPR | ** |
+| tblPO | ** |
+| tblDO | ** |
+| MasterL | ** |
+| tblBatch | ** |
+| tblBestExp | ** |
+| Statistics | * |
+| TestCountEntry | | 
+| Alinity_Count |  |
+| FOC-NonAbbott |  |
+| CountComp | ** |
+| Test_Count Data | ** |
+| FOCNonAbbott Data | ** |
+| FOCNonAbbottComp | ** |
+| Pivots | ** |
+| ItemCodeL | ** |
+| Correct REQ | * |
 
 Note: to document formulas used in each sheets
 
