@@ -160,7 +160,7 @@ Note: to continue documentation as user guide.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Stock-in and stock-out processes can be done with barcding or manually (for items that are not barcoded).
+- [ ] Stock-in and stock-out processes can be done with barcoding or manually (for items that are not barcoded).
 - [ ] Query quantity on hand for purchase request items and FOC.
 - [ ] Reagent verification list is auto-populated during stock-in process.
 - [ ] Produce department stock requistion forms.
