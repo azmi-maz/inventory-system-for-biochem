@@ -75,7 +75,7 @@ Use the `BLANK_README.md` to get started.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This project must be accompanied by another google sheet to allow external users to view/interact with the inventory system.
+This project must be accompanied by another google sheet to allow external users to view/ interact with the inventory system.
 <br />
 <a href="https://github.com/azmi-maz/supplier-view-inventory-system><strong>See repo here»</strong></a>
 
