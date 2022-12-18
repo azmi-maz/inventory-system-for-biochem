@@ -1,5 +1,6 @@
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/azmi-maz/inventory-system-for-biochem/main)
 
+![barcode](https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif)
 
 <!-- PROJECT LOGO -->
 <br />
