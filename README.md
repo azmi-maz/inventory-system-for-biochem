@@ -6,8 +6,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/azmi-maz/inventory-system-for-biochem">
-    <img src="![barcode](https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif)
-" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/87229604/208306950-c85c5315-9ebf-4991-9ff7-fe0b83cad68a.gif" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">project_title</h3>
