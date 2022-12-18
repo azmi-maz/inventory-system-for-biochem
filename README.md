@@ -56,9 +56,6 @@ Main features:
 * Produces statistical reports for monthly and annual reports.
 * Facilitates communication by producing reports between laboratory users, the procurement team, and suppliers on active purchase orders.
 
-
-Use the `BLANK_README.md` to get started.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
