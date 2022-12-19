@@ -162,24 +162,24 @@ Note: to continue documentation as user guide.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Stock-in and stock-out processes can be done with barcoding or manually (for items that are not barcoded).
-- [ ] Query quantity on hand for purchase request items and FOC.
-- [ ] Reagent verification list is auto-populated during stock-in process.
-- [ ] Produce department stock requistion forms.
-- [ ] Purchase requests and order features:
-    - [ ] Query list of received items to ease data entry for user.
-    - [ ] Query critical items that are below par level.
-    - [ ] Autocalculates reorder stock quantity for need-to-order items.
-    - [ ] Added FOC ordering.
-    - [ ] Purchase requests ordered as batch list.
-- [ ] Statistics:
-    - [ ] Test count to calculate the test usage - average per month (APM).
-    - [ ] Finance data, for weekly, monthly and annual report.
-- [ ] Dashboard to keep track of the important stuff.
-- [ ] Fixed auto filter issue.
-- [ ] Created script to update list codes in 'MasterL' sheet automatically.
-- [ ] Created Vesalius correction form.
-- [ ] Verification table auto formatted and added cell validation upon every stock-in process.
+- [x] Stock-in and stock-out processes can be done with barcoding or manually (for items that are not barcoded).
+- [x] Query quantity on hand for purchase request items and FOC.
+- [x] Reagent verification list is auto-populated during stock-in process.
+- [x] Produce department stock requistion forms.
+- [x] Purchase requests and order features:
+    - [x] Query list of received items to ease data entry for user.
+    - [x] Query critical items that are below par level.
+    - [x] Autocalculates reorder stock quantity for need-to-order items.
+    - [x] Added FOC ordering.
+    - [x] Purchase requests ordered as batch list.
+- [x] Statistics:
+    - [x] Test count to calculate the test usage - average per month (APM).
+    - [x] Finance data, for weekly, monthly and annual report.
+- [x] Dashboard to keep track of the important stuff.
+- [x] Fixed auto filter issue.
+- [x] Created script to update list codes in 'MasterL' sheet automatically.
+- [x] Created Vesalius correction form.
+- [x] Verification table auto formatted and added cell validation upon every stock-in process.
 
 
 <!-- See the [open issues](https://github.com/azmi-maz/inventory-system-for-biochem/issues) for a full list of proposed features (and known issues). -->
