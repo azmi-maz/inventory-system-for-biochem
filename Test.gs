@@ -412,10 +412,92 @@ let index = arr1.indexOf("A");
 }
 
 
+class Car {
+
+  constructor(name, year){
+    this.name = name;
+    this.year = year;
+  }
+
+  age(num){
+    return num + this.year
+  }
+}
+
+let carOwner1 = new Car('Ali', 2001);
+
+const testSheet = SpreadsheetApp.getActiveSpreadsheet();
+const masterLastRow = testSheet.getSheetByName("MasterL").getLastRow();
+let openMasterList = testSheet.getSheetByName("MasterL").getRange(2,1,masterLastRow-1,9).getValues();
+
+let findThis = 'A001';
+let createObj = {
+  id: 233,
+  people:
+  [{name: 'Ahmad', age: 25},
+  {name: 'Ali', age: 45}]};
+
+// let resultFound = openMasterList.findIndex(findThis);
+var myArray = [
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Peter"},
+    {"id": 3, "name": "Harry"}
+];
+
+// lookForThis = num => num.id === 2;
+let val = 3;
+function lookForThis (num) {
+
+  return num.id === val;
+}
+
+var result = myArray.find(item => item.id === 2);
+
+// var res = myArray.find(lookForThis);
+// console.log(res);
+// console.log(res.name);
+
+function myFunction() {
+var t1 = new Date().getTime();
+const sheetName = "MasterL";
+const [headers, ...rows] = SpreadsheetApp.getActiveSpreadsheet()
+.getSheetByName(sheetName)
+.getDataRange()
+.getValues();
+const res = rows.map((r) =>
+headers.reduce((o, h, j) => Object.assign(o, { [h]: r[j] }), {})
+);
+
+var result = res.find(item => item.Mastercode === 'A999');
+// console.log(result['Location']);
+var t2 = new Date().getTime();
+var timeDiff = t2-t1;
+// console.log(timeDiff); // 575 ms
+
+// console.log(res[0]);
+}
+
+for (i = 0; i < openMasterList.length; i++) {
+  if (openMasterList[i][0] === 'A999') {
+    // console.log(openMasterList[i]);
+  }
+}
 
 
+function testForClassConstruction(){
 
+var t1 = new Date().getTime();
 
+for (i = 0; i < openMasterList.length; i++) {
+  if (openMasterList[i][0] === 'A999') {
+    console.log(openMasterList[i]);
+  }
+}
+var t2 = new Date().getTime();
+var timeDiff = t2-t1;
+// console.log(timeDiff); // 6 ms
+
+}
 
 
 
