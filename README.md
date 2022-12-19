@@ -34,7 +34,7 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#installation">Installation</a></li>
-        <li><a href="#google-sheets-needed">Google sheets needed/a></li>
+        <li><a href="#google-sheets-guide">Google sheets guide/a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -170,8 +170,6 @@ Note: to continue documentation as user guide.
     - [ ] Query list of received items to ease data entry for user.
     - [ ] Query critical items that are below par level.
     - [ ] Autocalculates reorder stock quantity for need-to-order items.
-    - [ ] Supplier best expiry table.
-    - [ ] Supplier QOH view only.
     - [ ] Added FOC ordering.
     - [ ] Purchase requests ordered as batch list.
 - [ ] Statistics:
@@ -181,7 +179,6 @@ Note: to continue documentation as user guide.
 - [ ] Fixed auto filter issue.
 - [ ] Created script to update list codes in 'MasterL' sheet automatically.
 - [ ] Created Vesalius correction form.
-- [ ] Changed batch number creation to handle multiple offers.
 - [ ] Verification table auto formatted and added cell validation upon every stock-in process.
 
 
