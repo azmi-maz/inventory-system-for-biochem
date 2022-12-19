@@ -79,17 +79,19 @@ This project must be accompanied by another google sheet to allow external users
 
 ### Installation
 
-1. Create a google sheet
-2. Install Google Apps Script GitHub Assistant extension
-3. Clone this repo
-4. Login to GitHub using the extension with you GitHub token
-5. Pull the main branch
+1. Use this blank google sheet. (<a href="https://docs.google.com/spreadsheets/d/1EaFFXe-pCG0QoCwrrf4QZA1ujRWuNaJCXbmpY4sircQ/edit?usp=share_link"><strong>Use this link »</strong></a>)
+2. Install Google Apps Script GitHub Assistant extension.
+3. Clone this repo.
+4. Login to GitHub using the extension with you GitHub token.
+5. Pull the main branch.
 
-### Google sheets needed
+### Google sheets guide
 
-*limited - User interacts with protected sheet
+*protected sheet
 <br />
-**restricted - hidden sheet
+**hidden sheet
+<br />
+
 
 | Sheet Name | User Restriction |
 | ----------- | ----------- |
@@ -147,7 +149,7 @@ Note: to document formulas used in each sheets
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-INCOMING - scan the item barcode one row at a time and click the "Add" button.
+INCOMING - Scan the item barcode one row at a time and click the "Add" button.
 <br />
 OUTGOING - Choose the item by checking the checkbox and click "Stock out" button.
 
@@ -168,10 +170,20 @@ Note: to continue documentation as user guide.
     - [ ] Query list of received items to ease data entry for user.
     - [ ] Query critical items that are below par level.
     - [ ] Autocalculates reorder stock quantity for need-to-order items.
+    - [ ] Supplier best expiry table.
+    - [ ] Supplier QOH view only.
+    - [ ] Added FOC ordering.
+    - [ ] Purchase requests ordered as batch list.
 - [ ] Statistics:
     - [ ] Test count to calculate the test usage - average per month (APM).
-    - [ ] Finance data, for monthly and annual report.
+    - [ ] Finance data, for weekly, monthly and annual report.
 - [ ] Dashboard to keep track of the important stuff.
+- [ ] Fixed auto filter issue.
+- [ ] Created script to update list codes in 'MasterL' sheet automatically.
+- [ ] Created Vesalius correction form.
+- [ ] Changed batch number creation to handle multiple offers.
+- [ ] Verification table auto formatted and added cell validation upon every stock-in process.
+
 
 <!-- See the [open issues](https://github.com/azmi-maz/inventory-system-for-biochem/issues) for a full list of proposed features (and known issues). -->
 
