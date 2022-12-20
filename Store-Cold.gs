@@ -2,6 +2,8 @@ let countedFilteredColdItemsList = [];
 
 function getColdOutgoing() {
   
+  // var t1 = new Date().getTime();
+
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getTblStockOutLastRow = ss.getSheetByName("tblStockOut").getLastRow();
   const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
@@ -46,12 +48,13 @@ function getColdOutgoing() {
                     itemUOM,
                     getNumRowForImage
                     ]);
+                    break; // New
           }
         }
       }
     }
   }
-  //console.log(findColdItemsList);
+  // console.log('Length of array =', findColdItemsList.length); // 1768
 
   // Go through each cold items array and prepare for display array
   let startFilterDate = ss.getSheetByName("Cold_Items").getRange(2,11,1,1).getValue();
@@ -63,13 +66,13 @@ function getColdOutgoing() {
     if (findColdItemsList[d][0] >= startFilterDate &&
         findColdItemsList[d][0] <= endFilterDate){
           filteredColdItemsList.push([
-                        findColdItemsList[d][1],   // Item Code
-                        findColdItemsList[d][2],   // Item Name
-                        findColdItemsList[d][3],   // Lot Number
+                        findColdItemsList[d][1],                               // Item Code
+                        findColdItemsList[d][2],                               // Item Name
+                        findColdItemsList[d][3],                               // Lot Number
                         findColdItemsList[d][4].toLocaleDateString("en-UK"),   // Exp Date
-                        findColdItemsList[d][5],   // Multicount
-                        findColdItemsList[d][6],   // UOM
-                        findColdItemsList[d][7],   // Range for image
+                        findColdItemsList[d][5],                               // Multicount
+                        findColdItemsList[d][6],                               // UOM
+                        findColdItemsList[d][7],                               // Range for image
                         ]);
     }
   }
@@ -168,6 +171,9 @@ function getColdOutgoing() {
   const endDate = endFilterDate.toLocaleDateString("en-UK");
 
   ss.getSheetByName("Cold_Items").getRange(11,11,1,1).setValue(`${fromDate} to ${endDate}`+ "\r\n" +`${countEachItemInArray} items printed`);
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t1;
+  // console.log(timeDiff); // 131439 ms before update. To 68961 - 98600 ms. May helped a bit with breaks.
 
 }
 

@@ -7,11 +7,11 @@ function updateStoreAlinityArrayBasedOnPage(){
 
   // Clean up sheet for new arrays
   ss.getSheetByName("Store_Alinity").getRange(8,2,20,7).clearContent();
-  ss.getSheetByName("Store_Alinity").getRange(2,11,getTblAlinityStoreLastRow-1,7).clearContent();
+  ss.getSheetByName("Store_Alinity").getRange(2,11,getTblAlinityStoreLastRow-1,7).clearContent().removeCheckboxes();
   styleStoreSheetReadableHeight(); // To set the row heights smaller
 
   // Paste the available list of items
-  ss.getSheetByName("Store_Alinity").getRange(2,11,finalStoreTransfer.length,finalStoreTransfer[0].length).setValues(finalStoreTransfer);
+  ss.getSheetByName("Store_Alinity").getRange(2,11,finalStoreTransfer.length,finalStoreTransfer[0].length).setValues(finalStoreTransfer).sort([{column: 13, ascending: true}, {column: 15, ascending: true}]);
   let getList = ss.getSheetByName("Store_Alinity").getRange(2,11,finalStoreTransfer.length,1);
   getList.insertCheckboxes();
 
@@ -54,12 +54,13 @@ function pasteStoreAlinityArrayBasedOnPage(){
                 checkdate,                            // Expiry date
                 itemUOM,                              // UOM
                 getNumRowForImage                     // Number of rows
-      ])
+      ]);
+      break; // New
       }
     }
   }
-}
-  //console.log(choosenItemsArray)
+  }
+  // console.log('Length of array', choosenItemsArray.length); // 3
 
   // Check for length, max only 10 items
   if (choosenItemsArray.length > 10){

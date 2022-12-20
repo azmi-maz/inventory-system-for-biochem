@@ -1,5 +1,7 @@
 function updateNameSheet() {
 
+  // var t1 = new Date().getTime();
+
   updatePRList();
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getTblPRLastRow = ss.getSheetByName("tblPR").getLastRow();
@@ -8,9 +10,9 @@ function updateNameSheet() {
   let getTblPRListArray = ss.getSheetByName("tblPR").getRange(2,1,getTblPRLastRow-1,10).getValues();
   let getTblBOQOHMTHLastRow = ss.getSheetByName("BO-QOH<MTH").getLastRow();
 
-// Start copy of code from updateBatchList
-//-------------------------------------------------------------------------------------------------------------------
-// To Update List of QOH
+  // Start copy of code from updateBatchList
+  //-------------------------------------------------------------------------------------------------------------------
+  // To Update List of QOH
     const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
     let getListOfUniqueID = ss.getSheetByName("tblUniqueINID").getRange(2,1,getTblUniqueINIDLastRow-1,5).getValues();
     let getMasterList = ss.getSheetByName("MasterL").getRange(2,1,getMasterListLastRow-1,17).getValues();
@@ -20,6 +22,8 @@ function updateNameSheet() {
     let getItemCodeValueForLookUp = '';
     let getAPMValue = 0;
     let getTestPerKitValue = 0;
+    let getMultiCountValue = 0;
+    let getItemType = '';
     let extractListOfQOH = [];
     let extractListOfQOHListForCount = [];
 
@@ -27,9 +31,10 @@ function updateNameSheet() {
     for (t = 0; t < listOfQOHSingleCount.length; t++){
     for (u = 0; u < getListOfUniqueID.length; u++){
         
-        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0] )
+        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0]){
         
         getItemCodeValueForLookUp = getListOfUniqueID[u][2];
+        // Do not break here
         
     for (v = 0; v < getMasterList.length; v++){
         
@@ -38,10 +43,12 @@ function updateNameSheet() {
             getTestPerKitValue = getMasterList[v][12];
             getMultiCountValue = getMasterList[v][7];
             getItemType = getMasterList[v][2];
+            break; // New
             
           }
         }
       }
+    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -54,7 +61,7 @@ function updateNameSheet() {
             getItemCodeValueForLookUp
             ])
     }
-//console.log(extractListOfQOH)
+  //console.log(extractListOfQOH)
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOHListForCount);
@@ -83,6 +90,7 @@ function updateNameSheet() {
          getItemTypeFromArray = countExtractListOfQOHWithAPMandTestPerKit[x][4];
          getQOHinBoxes = getQOHValue / getMultiCountFromArray;
          getQOHLastValue = getQOHValue / getMultiCountFromArray / getAPMValueFromArray;
+         break; // New
     }
     }
     countedQOHListWithQOHlastarray.push([
@@ -97,8 +105,8 @@ function updateNameSheet() {
     }
     //console.log(countedQOHListWithQOHlastarray);
 
-// End copy of code from updateBatchList
-//-------------------------------------------------------------------------------------------------------------------
+  // End copy of code from updateBatchList
+  //-------------------------------------------------------------------------------------------------------------------
 
   // Get all the active PR from tblPR
   let findAllActivePRList = [];
@@ -142,23 +150,28 @@ function updateNameSheet() {
                     countAllPendingBOBasedOnItemCodes[b][3],   // Pending BO in Kits
                     qohLastInDateFormat                        // QOH last in date
                     ]);
+                    break; // New
 
 
     }
   }
-}
-//console.log(resArrayForPaste)
+  }
+  // console.log(resArrayForPaste)
 
-// Clear off the sheet first
-if (getTblBOQOHMTHLastRow-1 === 0){
-} else {
-ss.getSheetByName("BO-QOH<MTH").getRange(2,1,getTblBOQOHMTHLastRow-1,8).clearContent();
-ss.getSheetByName("BO-QOH<MTH").getRange(2,1,getTblBOQOHMTHLastRow-1,8).getFilter().remove();
-}
+  // Clear off the sheet first
+  if (getTblBOQOHMTHLastRow-1 === 0){
+  } else {
+  ss.getSheetByName("BO-QOH<MTH").getRange(2,1,getTblBOQOHMTHLastRow-1,8).clearContent();
+  ss.getSheetByName("BO-QOH<MTH").getRange(2,1,getTblBOQOHMTHLastRow-1,8).getFilter().remove();
+  }
 
-// Paste the new array
-ss.getSheetByName("BO-QOH<MTH").getRange(2,1,resArrayForPaste.length,resArrayForPaste[0].length).setValues(resArrayForPaste);
-ss.getSheetByName("BO-QOH<MTH").getRange(1,1,resArrayForPaste.length+1,8).createFilter().sort(8,true);
+  // Paste the new array
+  ss.getSheetByName("BO-QOH<MTH").getRange(2,1,resArrayForPaste.length,resArrayForPaste[0].length).setValues(resArrayForPaste);
+  ss.getSheetByName("BO-QOH<MTH").getRange(1,1,resArrayForPaste.length+1,8).createFilter().sort(8,true);
 
+
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t1;
+  // console.log(timeDiff); // 68840 ms before update, reduced to 9621 ms after added breaks
 
 }

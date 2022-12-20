@@ -47,6 +47,7 @@ function getStorePROutgoing() {
                     itemUOM,
                     getNumRowForImage
                     ]);
+                    break; // New
           }
         }
       }

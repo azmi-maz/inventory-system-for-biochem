@@ -1,4 +1,6 @@
 function updateVerification() {
+
+  // var t1 = new Date().getTime();
   
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getTblVerificationLastRow = ss.getSheetByName("Verification").getLastRow();
@@ -24,7 +26,7 @@ function updateVerification() {
   // Clear off Available Kits Column
   ss.getSheetByName("Verification").getRange(2,12,getTblVerificationLastRow-1,3).clearContent();
 
-// Taken from BO-QOH and modified  __________________________________________________________________________
+  // Taken from BO-QOH and modified  __________________________________________________________________________
     const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
     let getListOfUniqueID = ss.getSheetByName("tblUniqueINID").getRange(2,1,getTblUniqueINIDLastRow-1,5).getValues();
     //let getMasterList = ss.getSheetByName("MasterL").getRange(2,1,getMasterListLastRow-1,17).getValues();
@@ -47,12 +49,13 @@ function updateVerification() {
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getLotNumber
-            ])
+            ]);
+            break; // New
         }
       }
     }
 
-//console.log(extractListOfQOH.sort())
+  //console.log(extractListOfQOH.sort())
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOH);
@@ -114,6 +117,10 @@ function updateVerification() {
 
     // Create filter
     ss.getSheetByName("Verification").getRange(1,1,getTblVerificationLastRow,14).createFilter().sort(2,true);
+
+    // var t2 = new Date().getTime();
+    // var timeDiff = t2 - t1;
+    // console.log(timeDiff); // 9984 ms before update. Reduced to 7361 ms after adding breaks.
 
 
 }

@@ -1,4 +1,6 @@
 function statisticsOutput1() {
+
+  // var t1 = new Date().getTime();
   
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getTblINLastRow = ss.getSheetByName("tblStockIN").getLastRow();
@@ -22,12 +24,14 @@ function statisticsOutput1() {
 
             newFilteredIncoming.push(
                   tblUniqueList[b][2]
-            )
+            );
+            break; // New
+            
 
           }
         }
       }
-      //console.log(newFilteredIncoming)
+      // console.log('Length of array =', newFilteredIncoming.length); // 544
 
   // Expand Incoming
   let expandNewFilteredIncoming = [];
@@ -44,26 +48,29 @@ function statisticsOutput1() {
 
         expandNewFilteredIncoming.push(
           newFilteredIncoming[a]
-        )
+        );
+
         expandNewFilteredIncomingValue.push(
           getItemValue
-        )
+        );
+        break; // New
 
       }
     }
   }
-  //console.log(expandNewFilteredIncoming)
-let sumOfIncomingItems = 0;
-if (expandNewFilteredIncomingValue.length === 0){
-sumOfIncomingItems = 0;
-} else {
-sumOfIncomingItems = expandNewFilteredIncomingValue.reduce(function(previousValue, currentValue) {
-  return previousValue + currentValue;
-});
-}
+  // console.log('Length of array =', expandNewFilteredIncoming.length); //342
 
-//console.log(sumOfIncomingItems)
-//console.log(expandNewFilteredIncoming.length)
+  let sumOfIncomingItems = 0;
+  if (expandNewFilteredIncomingValue.length === 0){
+  sumOfIncomingItems = 0;
+  } else {
+  sumOfIncomingItems = expandNewFilteredIncomingValue.reduce(function(previousValue, currentValue) {
+    return previousValue + currentValue;
+  });
+  }
+
+  //console.log(sumOfIncomingItems)
+  //console.log(expandNewFilteredIncoming.length)
 
   // For Outgoing count
   let newFilteredOutgoing = [];
@@ -74,11 +81,13 @@ sumOfIncomingItems = expandNewFilteredIncomingValue.reduce(function(previousValu
 
             newFilteredOutgoing.push(
                   tblUniqueList[b][2]
-            )
+            );
+            break; // New
 
           }
         }
       }
+    // console.log('Length of array =', newFilteredOutgoing.length); // 486
 
   // Expand Outgoing
   let expandNewFilteredOutgoing = [];
@@ -95,32 +104,40 @@ sumOfIncomingItems = expandNewFilteredIncomingValue.reduce(function(previousValu
 
         expandNewFilteredOutgoing.push(
           newFilteredOutgoing[a]
-        )
+        );
+
         expandNewFilteredOutgoingValue.push(
           getOutItemValue
-        )
+        );
+        break; // New
+
 
       }
     }
   }
+    // console.log('Length of array =', expandNewFilteredOutgoing.length); // 323
 
-let sumOfOutgoingItems = expandNewFilteredOutgoingValue.reduce(function(previousValue, currentValue) {
-  return previousValue + currentValue;
-});
+  let sumOfOutgoingItems = expandNewFilteredOutgoingValue.reduce(function(previousValue, currentValue) {
+    return previousValue + currentValue;
+  });
 
-//console.log(sumOfOutgoingItems)
-//console.log(expandNewFilteredOutgoing.length)
+  //console.log(sumOfOutgoingItems)
+  //console.log(expandNewFilteredOutgoing.length)
 
-// Paste
+  // Paste
 
-// Incoming - Number of PR items
-ss.getSheetByName("Statistics").getRange(7,2,1,1).setValue(expandNewFilteredIncoming.length);
-// Incoming - Total Value
-ss.getSheetByName("Statistics").getRange(8,2,1,1).setValue(Math.floor(sumOfIncomingItems));
-// Outgoing - Number of PR items
-ss.getSheetByName("Statistics").getRange(7,3,1,1).setValue(expandNewFilteredOutgoing.length);
-// Outgoing - Total Value
-ss.getSheetByName("Statistics").getRange(8,3,1,1).setValue(Math.floor(sumOfOutgoingItems));
+  // Incoming - Number of PR items
+  ss.getSheetByName("Statistics").getRange(7,2,1,1).setValue(expandNewFilteredIncoming.length);
+  // Incoming - Total Value
+  ss.getSheetByName("Statistics").getRange(8,2,1,1).setValue(Math.floor(sumOfIncomingItems));
+  // Outgoing - Number of PR items
+  ss.getSheetByName("Statistics").getRange(7,3,1,1).setValue(expandNewFilteredOutgoing.length);
+  // Outgoing - Total Value
+  ss.getSheetByName("Statistics").getRange(8,3,1,1).setValue(Math.floor(sumOfOutgoingItems));
+
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t1;
+  // console.log(timeDiff); // 25069 ms before update. Nope breaks didn't reduce the time.
 
 
 }

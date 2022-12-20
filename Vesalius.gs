@@ -22,7 +22,7 @@ function collectVesalius() {
     for (t = 0; t < currentQOH.length; t++){
     for (u = 0; u < getListOfUniqueID.length; u++){
         
-        if (currentQOH[t] === getListOfUniqueID[u][0] )
+        if (currentQOH[t] === getListOfUniqueID[u][0]){
         
         getItemCodeValueForLookUp = getListOfUniqueID[u][2];
         
@@ -32,16 +32,18 @@ function collectVesalius() {
             getAPMValue = getMasterList[v][8];
             getTestPerKitValue = getMasterList[v][12];
             getMultiCountValue = getMasterList[v][7];
+            break; // New
             
           }
         }
       }
+    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             ])
 
     }
-//console.log(extractListOfQOH[0])
+  //console.log(extractListOfQOH[0])
 
     let cleanedgetMasterListJustCodes = [];
     for (a= 0; a < getMasterJustCodeList.length; a++){
@@ -83,6 +85,7 @@ function collectVesalius() {
           getVExcelListArray[a][9], // VExcel UOM
           getMasterListArray[b][12]  // Master Test Per Kit
         ]);
+        break; // New
       }
     }
   }
@@ -115,7 +118,7 @@ function collectVesalius() {
           quant,                    // Quantity to correct
           matchVesaliusCode[a][4],  // UOM
           matchVesaliusCode[a][6]   // Index for barcode
-        ])
+        ]);
           
         }
       }

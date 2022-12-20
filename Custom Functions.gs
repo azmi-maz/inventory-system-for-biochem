@@ -18,7 +18,6 @@ function occurrences(string, subString, allowOverlapping) {
     return n;
 }
 
-
 function appendArrays() {
   var temp = []
   for (var q = 0; q < arguments.length; q++) {
@@ -27,16 +26,14 @@ function appendArrays() {
   return temp;
 }
 
-
 function ExcelDateToJSDate(date) {
   return new Date(Math.round((date - 25569)*86400*1000));
 
 }
 
-
 function jsDateToExcelDate(serial) {
-let date = new Date(serial);
- return converted = 25569.0 + ((date.getTime() - (date.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
+  let date = new Date(serial);
+  return converted = 25569.0 + ((date.getTime() - (date.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
 }
 
 function createUniqueID(enterArrayHere, fromWhichSheet){
@@ -89,7 +86,6 @@ function findRemainingUniqueID(arrayIN, arrayOUT) {
       }
     }
   }
-
   return arrayIN;
   //console.log(arrayIN);
 }
@@ -101,7 +97,6 @@ function removeItemOnce(arr, value) {
   }
   return arr;
 }
-
 
 function toCreateCheckBox(){
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -115,7 +110,7 @@ function toCreateCheckBox(){
 
 function countArrayElem(arr){
 
-let countedItems = arr.reduce(function (allNames, name) {
+  let countedItems = arr.reduce(function (allNames, name) {
   if (name in allNames) {
     allNames[name]++
   }
@@ -123,29 +118,29 @@ let countedItems = arr.reduce(function (allNames, name) {
     allNames[name] = 1
   }
   return allNames
-}, {})
+  }, {})
 
-// Return number 1
-let listOfItems = [];
-for (const prop in countedItems) {
+  // Return number 1
+  let listOfItems = [];
+  for (const prop in countedItems) {
 
   listOfItems.push(prop);  
-}
+  }
 
-// Return number 2
-let listCountedItems = [];
+  // Return number 2
+  let listCountedItems = [];
   for (const prop in countedItems) {
   listCountedItems.push(countedItems[prop]);
-}
+  }
 
-// Return number 3
-let listOfNewCount = [];
-for (const prop in countedItems) {
+  // Return number 3
+  let listOfNewCount = [];
+  for (const prop in countedItems) {
 
   listOfNewCount.push([prop, countedItems[prop]]);  
-}
+  }
 
-return [listOfItems, listCountedItems, listOfNewCount];
+  return [listOfItems, listCountedItems, listOfNewCount];
 
 }
 
@@ -157,63 +152,62 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-
 function countRemainderFromPR(prList, doList){
 
-// Create object array for PR items
-listOfPR = prList.map(function(x) {
+  // Create object array for PR items
+  listOfPR = prList.map(function(x) {
     return {    
         "PR": x[0],
         "Item": x[1],
         "Qty": x[2]
     }
-});
-//console.log(listOfPR);
-//console.log(listOfPR[0].Qty)
+  });
+  //console.log(listOfPR);
+  //console.log(listOfPR[0].Qty)
 
-// Create object array for DO items, with the Quantity in negative value
-listOfDO = doList.map(function(x) {
+  // Create object array for DO items, with the Quantity in negative value
+  listOfDO = doList.map(function(x) {
     return {    
         "PR": x[0],
         "Item": x[1],
         "Qty": -x[2]
     }
-});
-//console.log(listOfDO);
+  });
+  //console.log(listOfDO);
 
-// Combine objects from PR list and DO list
-Array.prototype.push.apply(listOfPR,listOfDO);
+  // Combine objects from PR list and DO list
+  Array.prototype.push.apply(listOfPR,listOfDO);
 
-//console.log(listOfPR);
+  //console.log(listOfPR);
 
 
-// Sum up the quantity in the object array
-let result = [];
-listOfPR.reduce(function(res, value) {
-  if (!res[value.PR]) {
-    res[value.PR] = { PR: value.PR, Item: value.Item, Qty: 0 };
-    result.push(res[value.PR])
+  // Sum up the quantity in the object array
+  let result = [];
+  listOfPR.reduce(function(res, value) {
+    if (!res[value.PR]) {
+      res[value.PR] = { PR: value.PR, Item: value.Item, Qty: 0 };
+      result.push(res[value.PR])
   }
   res[value.PR].Qty += value.Qty;
   return res;
-}, {});
+  }, {});
 
-//console.log(result);
+  //console.log(result);
 
-// Convert object to array for further calculation or paste       
+  // Convert object to array for further calculation or paste       
    let newArr = result.map(function(val, index){ 
             return [val.PR,val.Item,val.Qty]
    }) 
 
-return newArr;      
-//console.log(newArr); 
+  return newArr;      
+  //console.log(newArr); 
 
 }
 
 function countUpItemFromPR(prList){
 
-// Create object array for PR items
-listOfPR = prList.map(function(x) {
+  // Create object array for PR items
+  listOfPR = prList.map(function(x) {
     return {    
         "Vesalius": x[0],
         "ItemCode": x[1],
@@ -221,19 +215,19 @@ listOfPR = prList.map(function(x) {
         "ItemType": x[3],
         "Qty": x[4]
     }
-});
-//console.log(listOfPR);
-//console.log(listOfPR[0].Qty);
+  });
+  //console.log(listOfPR);
+  //console.log(listOfPR[0].Qty);
 
-// Combine objects from PR list and DO list
-//Array.prototype.push.apply(listOfPR);
+  // Combine objects from PR list and DO list
+  //Array.prototype.push.apply(listOfPR);
 
-//console.log(listOfPR);
+  //console.log(listOfPR);
 
-// Sum up the quantity in the object array
-let result = [];
-listOfPR.reduce(function(res, value) {
-  if (!res[value.Vesalius] &&
+  // Sum up the quantity in the object array
+  let result = [];
+  listOfPR.reduce(function(res, value) {
+    if (!res[value.Vesalius] &&
       !res[value.ItemCode] &&
       !res[value.ItemName]
       ) {
@@ -261,11 +255,11 @@ listOfPR.reduce(function(res, value) {
         .Qty += value.Qty;
   
     return res;
-}, {});
+  }, {});
 
-//console.log(result);
+  //console.log(result);
 
-// Convert object to array for further calculation or paste       
+  // Convert object to array for further calculation or paste       
    let newArr = result.map(function(val, index){ 
             return [val.Vesalius,
                     val.ItemCode,
@@ -273,8 +267,8 @@ listOfPR.reduce(function(res, value) {
                     val.Qty]
    }) 
 
-return newArr;      
-//console.log(newArr); 
+  return newArr;      
+  //console.log(newArr); 
 
 }
 
@@ -325,11 +319,11 @@ function makeArrayListOfNewOrderBasedOnTest (testperkit, apm, qohlast, bestexp, 
       }
     }
   }
-//console.log(arrayListOfNumItems);
-//return arrayListOfNumItems;
-//console.log(result);
-//console.log(resultRounded);
-return [result, resultRounded];
+  //console.log(arrayListOfNumItems);
+  //return arrayListOfNumItems;
+  //console.log(result);
+  //console.log(resultRounded);
+  return [result, resultRounded];
 
 }
 
@@ -348,11 +342,10 @@ function makeArrayListOfNewOrderBasedOnKit (apm, qohlast) {
     newExpDate = new Date(today.getTime()+(newPRoverAPMplusQOHlast*convertToSeconds));
     arrayListOfNumKits.push([i, newPRoverAPMplusQOHlast, newExpDate]);
   }
-//console.log(arrayListOfNumKits);
-return arrayListOfNumKits;
+  //console.log(arrayListOfNumKits);
+  return arrayListOfNumKits;
 
 }
-
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -361,7 +354,6 @@ function sleep(milliseconds) {
     currentDate = Date.now();
   } while (currentDate - date < milliseconds);
 }
-
 
 function findLastPOforQOH(){
 
@@ -389,7 +381,7 @@ function findLastPOforQOH(){
     resultFind = getTblPOArray[findIndex][1];
     resultArray.push(resultFind);
   }
-}
+  }
 
   //console.log(resultFind)
   return resultArray;
@@ -422,13 +414,12 @@ function findLastPOforQOHBO(){
     resultFind = getTblPOArray[findIndex][1];
     resultArray.push(resultFind);
   }
-}
+  }
 
   //console.log(resultFind)
   return resultArray;
 
 }
-
 
 function findLastPOforZeroQOH(){
 
@@ -456,7 +447,7 @@ function findLastPOforZeroQOH(){
     resultFind = getTblPOArray[findIndex][1];
     resultArray.push(resultFind);
   }
-}
+  }
 
   //console.log(resultFind)
   return resultArray;

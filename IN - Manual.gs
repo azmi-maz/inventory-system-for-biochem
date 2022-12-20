@@ -1,5 +1,7 @@
  function manualIncomingStock() {
   
+  //  var t1 = new Date().getTime();
+
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
   const getIncomingListLastRow = ss.getSheetByName("MANUAL").getLastRow();
@@ -19,10 +21,10 @@
   //console.log(getIncomingListLastRow);
   //console.log(getIncomingListLastCol);
   
-//Goes through each array for incoming items
-let trimmedNameList = [];
+  //Goes through each array for incoming items
+  let trimmedNameList = [];
   for (var i = 0; i < getIncomingList.length; i++){
-//  1) Trim up
+  //  1) Trim up
     if (getIncomingList[i][0] != '' &&
         getIncomingList[i][3] != '' ||
         getIncomingList[i][2] != '' ||
@@ -30,18 +32,18 @@ let trimmedNameList = [];
     firstValue = getIncomingList[i][0].toString();
     cutFirstValue = firstValue.trim();
     getQuantity = getIncomingList[i][3];
-// Add in the [] to the cutFirstValue to make it into proper array
+  // Add in the [] to the cutFirstValue to make it into proper array
     trimmedNameList.push([cutFirstValue, getQuantity]);
 
   }
-}
-//console.log(getIncomingList);
-//console.log(trimmedNameList);
+  }
+  //console.log(getIncomingList);
+  //console.log(trimmedNameList);
 
-// 3) Transaction id
+  // 3) Transaction id
 
-// 4.1) Timestamp
-let stampUpAllItemsList = [];
+  // 4.1) Timestamp
+  let stampUpAllItemsList = [];
 
     for (var n = 0; n < getIncomingList.length; n++){
     if (getIncomingList[n][0] != '' &&
@@ -63,9 +65,9 @@ let stampUpAllItemsList = [];
       stampUpAllItemsList.push(time);
       }
     }
-//console.log(stampUpAllItemsList);
+  //console.log(stampUpAllItemsList);
 
-// 4.2) Blank column
+  // 4.2) Blank column
   let blankUpCol = [];
 
     for (var s = 0; s < getIncomingList.length; s++){
@@ -78,11 +80,11 @@ let stampUpAllItemsList = [];
       blankUpCol.push([blankValue]);
       }
     }
-//console.log(blankUpCol);
+  //console.log(blankUpCol);
 
-// 5) Vesalius Code
+  // 5) Vesalius Code
 
-// 6) Item Code
+  // 6) Item Code
   let refItemCodeList = getListCodeToMasterCode;
   let matchedMasterCode = [];  
 
@@ -90,14 +92,15 @@ let stampUpAllItemsList = [];
       for (var k = 0; k < refItemCodeList.length; k++){
           if (trimmedNameList[j][0] === refItemCodeList[k][0]){
               const matchedValue = refItemCodeList[k][1];
-              //Can break k here once found?
+
               matchedMasterCode.push([matchedValue]);
+              break; // New
     } 
   }
-}
-//console.log(matchedMasterCode);
+  }
+  // console.log('Length of array =', matchedMasterCode.length); //
 
-// 7) Item Type, Location, Extract Multicounts
+  // 7) Item Type, Location, Extract Multicounts
     let matchedItemType = [];
     let matchedMultiCountsList = [];
 
@@ -111,15 +114,16 @@ let stampUpAllItemsList = [];
 
                 matchedItemType.push([matchedItemTypeValue,matchedItemLocationValue]);
                 matchedMultiCountsList.push([matchedMultiCountsValue]);
+                break; // New
 
       }
     }
   }
 
-//console.log(matchedItemType);
-//console.log(matchedMultiCountsList);
+  // console.log('Length of array =', matchedItemType.length); // 13
+  //console.log(matchedMultiCountsList);
 
-// 8) Modify Lot Number
+  // 8) Modify Lot Number
   let modifiedLotNumberList = [];
   for (var p = 0; p < getIncomingList.length; p++){
     if (getIncomingList[p][0] != '' &&
@@ -151,9 +155,9 @@ let stampUpAllItemsList = [];
     }
   }
 
-//console.log(modifiedLotNumberList);
+  //console.log(modifiedLotNumberList);
 
-// 9) Expiry date extraction
+  // 9) Expiry date extraction
   let extractedExpDate = [];
   for (var q = 0; q < getIncomingList.length; q++){
     if (getIncomingList[q][0] != '' &&
@@ -170,10 +174,10 @@ let stampUpAllItemsList = [];
     extractedExpDate.push([expDateValue]);
     }
   }
-//console.log(extractedExpDate);
+  //console.log(extractedExpDate);
 
-// 10) Quantity
-let correctedCountPerItems = [];
+  // 10) Quantity
+  let correctedCountPerItems = [];
 
   for (var m = 0; m < matchedMultiCountsList.length; m++){
     
@@ -181,11 +185,11 @@ let correctedCountPerItems = [];
     correctedCountPerItems.push([multiplyMulticountValue]);
     
   }
-//console.log(correctedCountPerItems);
+  //console.log(correctedCountPerItems);
 
-// QC Code
+  // QC Code
 
-//  11) Collect all arrays and put into one
+  // 11) Collect all arrays and put into one
 
     // Column One - Date and Time
     let col2Timestamp = stampUpAllItemsList;
@@ -207,7 +211,7 @@ let correctedCountPerItems = [];
     
 
     let resArrayListForManualIncomingStock = [];
-for (r = 0; r < col2Timestamp.length; r++) {
+  for (r = 0; r < col2Timestamp.length; r++) {
   resArrayListForManualIncomingStock.push(appendArrays(
     col2Timestamp[r],       // Timestamp
     colBlank[0],            // MANUAL stamp
@@ -219,14 +223,14 @@ for (r = 0; r < col2Timestamp.length; r++) {
     col8ExpDate[r][0],      // Exp Date
     col10Quantity[r][0]     // Quantity in smallest UOM
     ));
-}
+  }
 
-//console.log(resArrayListForManualIncomingStock);
+  //console.log(resArrayListForManualIncomingStock);
 
-// Expand each row based on multicount to make each transaction unique
-// Autogenerate id for each row of transaction
+  // Expand each row based on multicount to make each transaction unique
+  // Autogenerate id for each row of transaction
 
-//console.log(resArrayListForManualIncomingStock);
+  //console.log(resArrayListForManualIncomingStock);
     let addNewRowsPerCount = col10Quantity;
     //let expandRows = [];
     let tblUniqueINIDList = [];
@@ -277,8 +281,11 @@ for (r = 0; r < col2Timestamp.length; r++) {
 
     updateQOHList();
     updateOUTGOINGpaste();
-  
+ 
 
+    // var t2 = new Date().getTime();
+    // var timeDiff = t2 - t1;
+    // console.log(timeDiff); // 1157 ms for 13 items before update. Nope, breaks didn't reduce the time.
 
 }
 

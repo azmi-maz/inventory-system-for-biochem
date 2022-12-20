@@ -21,20 +21,20 @@ function incomingStock() {
   //console.log(getIncomingList);
   //console.log(getListCodeToMasterCode);
   
-//Goes through each array for incoming items
-let cleanedUpBarcodeList = [];
+  //Goes through each array for incoming items
+  let cleanedUpBarcodeList = [];
   for (var i = 0; i < getIncomingList.length; i++){
-//  1) Trim up OR remove blank spaces AND Substitute char(45) = '-' AND Substitute char(29) = ''
+  //  1) Trim up OR remove blank spaces AND Substitute char(45) = '-' AND Substitute char(29) = ''
     const firstValue = getIncomingList[i][0].toString();
     const cutFirstValue = firstValue.replace(/\s+/g,"").replace("-","").replace("","").trim();
-// Add in the [] to the cutFirstValue to make it into proper array
+  // Add in the [] to the cutFirstValue to make it into proper array
     cleanedUpBarcodeList.push([cutFirstValue]);
 
   }
-//console.log(getIncomingList);
-//console.log(cleanedUpBarcodeList);
+  //console.log(getIncomingList);
+  //console.log(cleanedUpBarcodeList);
 
-//  2.1) Convert List Code
+  //  2.1) Convert List Code
   let extractedListCode = [];
   let lookForFinalListCode = '';
   let finalListCode = '';
@@ -43,84 +43,84 @@ let cleanedUpBarcodeList = [];
     const catchListCode = cleanedUpBarcodeList[i][0];
     const extractListCodeLength = catchListCode.length;
 
-// For CSF variables
+  // For CSF variables
     const find240InCSF = catchListCode.indexOf(240);
     const countCF10InString = occurrences(catchListCode,'CF10');
 
-// For 1P0603 - transplant tubes
+  // For 1P0603 - transplant tubes
     const lookFor1P0603 = catchListCode.substring(catchListCode.length-6);
 
-// For BNP Cal
+  // For BNP Cal
     const lookForBNP = catchListCode.substring(catchListCode.length-3);
 
-// For 9P4240 - TACRO WBT PPT
+  // For 9P4240 - TACRO WBT PPT
     const lookFor9P4240 = catchListCode.substring(catchListCode.length-6);
 
-// For CG8+ Cartridges
+  // For CG8+ Cartridges
     const lookForCg8Cart = catchListCode.substring(9,16);
 
-// For UROMETER strips
+  // For UROMETER strips
     const lookForUrometer = catchListCode.substring(26,30).toUpperCase();
     //console.log(lookForUrometer)
 
-// For Biorad Control Kit
+  // For Biorad Control Kit
     const lookForBiorad = catchListCode.substring(2,16);
 
-// For Techno WBT
+  // For Techno WBT
     const lookForTechnoWBT = catchListCode.substring(20,26);
 
-// Check SIEMENS items if they are scannable
+  // Check SIEMENS items if they are scannable
 
-// SPACE FOR MORE VARIABLES TO HANDLE DIFFERENT BARCODE TYPES
+  // SPACE FOR MORE VARIABLES TO HANDLE DIFFERENT BARCODE TYPES
 
-// Else look for 240 with 1/2/3 occurrences, extract 6 length
+  // Else look for 240 with 1/2/3 occurrences, extract 6 length
     const count240InString = occurrences(catchListCode,240);
     const find240WithOneOccurrences = catchListCode.indexOf(240)+4;
     const find240WithTwoOccurrences = catchListCode.indexOf(240,find240WithOneOccurrences+1)+4;
     const find240WithThreeOccurrences = catchListCode.indexOf(240,find240WithTwoOccurrences+1)+4;
 
 
-// 1st condition to handle first occurrence of 240 & NOT CSF, transplant tube, BNP Cal, and TACRO WBT PPT 
+  // 1st condition to handle first occurrence of 240 & NOT CSF, transplant tube, BNP Cal, and TACRO WBT PPT 
     if (count240InString === 1 && countCF10InString === 0 && lookFor1P0603 != '1P0603' && lookForBNP != 'BNP' && lookFor9P4240 != '9P4240' && lookForUrometer != 'UC11'){
       
       finalListCode = catchListCode.substring(find240WithOneOccurrences,find240WithOneOccurrences+6).toUpperCase();
 
-// 2nd condition to handle CSF only
+  // 2nd condition to handle CSF only
     } else if (countCF10InString > 0 && extractListCodeLength === 43){
       
       finalListCode = catchListCode.substring(find240InCSF+3,find240InCSF+9).toUpperCase();
 
-// 3rd condition to handle transplant tubes
+  // 3rd condition to handle transplant tubes
     } else if (lookFor1P0603 === '1P0603'){
       
       finalListCode = '1P0603';
 
-// 4th condition to handle BNP Cal
+  // 4th condition to handle BNP Cal
     } else if (lookForBNP === 'BNP'){
 
       finalListCode = catchListCode.substring(39, 45).toUpperCase();
 
-// 5th condition to handle TACRO WBT PPT
+  // 5th condition to handle TACRO WBT PPT
     } else if (lookFor9P4240 === '9P4240'){
 
       finalListCode = '9P4240';
 
-// 5.1th condition to handle Techno WBT items with 2 occurrences of 240
+  // 5.1th condition to handle Techno WBT items with 2 occurrences of 240
     } else if (lookForTechnoWBT === '4S1610' & count240InString === 2){
 
                 finalListCode = lookForTechnoWBT.toUpperCase();
 
-// 6th condition to handle second occurrences of 240
+  // 6th condition to handle second occurrences of 240
     } else if (count240InString === 2){
 
       finalListCode = catchListCode.substring(find240WithTwoOccurrences,find240WithTwoOccurrences+6).toUpperCase();
 
-// 7th condition to handle third occurrences of 240
+  // 7th condition to handle third occurrences of 240
     } else if (count240InString === 3){
 
       finalListCode = catchListCode.substring(find240WithThreeOccurrences).toUpperCase();
 
-// 8th condition to handle CG8+ items
+  // 8th condition to handle CG8+ items
     } else if (lookForCg8Cart === '9000166' ||
                lookForCg8Cart === '9000463' ||
                lookForCg8Cart === '9000647' ||
@@ -128,15 +128,15 @@ let cleanedUpBarcodeList = [];
 
                 finalListCode = lookForCg8Cart;
 
-// 9th condition to handle Urometer items
-// NEED TO ADD THE MMD UROMETER HERE
+  // 9th condition to handle Urometer items
+  // NEED TO ADD THE MMD UROMETER HERE
     } else if (lookForUrometer === 'U05K' ||
                lookForUrometer === 'UC11' ||
                lookForUrometer === 'U100'){
                  
                 finalListCode = lookForUrometer.toUpperCase();
 
-// 10th condition to handle Biorad control items
+  // 10th condition to handle Biorad control items
     } else if (lookForBiorad === '06950996001649'){
 
                 finalListCode = lookForBiorad.toUpperCase();
@@ -163,12 +163,12 @@ let cleanedUpBarcodeList = [];
         }
     }
       extractedListCode.push([lookForFinalListCode]);
-}
+  }
 
-//console.log(finalListCode);
-//console.log(extractedListCode);
+  //console.log(finalListCode);
+  //console.log(extractedListCode);
 
-//  2.2) Convert List Code to Master Code
+  //  2.2) Convert List Code to Master Code
   let refItemCodeList = getListCodeToMasterCode;
   let matchedMasterCode = [];  
 
@@ -180,11 +180,11 @@ let cleanedUpBarcodeList = [];
               matchedMasterCode.push([matchedValue]);
     } 
   }
-}
-//console.log(extractedListCode);
-//console.log(matchedMasterCode);
+  }
+  //console.log(extractedListCode);
+  //console.log(matchedMasterCode);
 
-//  3) Item Name, Item Type, Location, Lot Number length to extract, Extract Multicounts
+  //  3) Item Name, Item Type, Location, Lot Number length to extract, Extract Multicounts
     let matchedItemName = [];
     let matchedLotNumberLength = [];
     let matchedMultiCountsList = [];
@@ -208,11 +208,11 @@ let cleanedUpBarcodeList = [];
     }
   }
 
-//console.log(matchedItemName);
-//console.log(matchedLotNumberLength);
-//console.log(matchedMultiCountsList);
+  //console.log(matchedItemName);
+  //console.log(matchedLotNumberLength);
+  //console.log(matchedMultiCountsList);
 
-//  4) Find Lot Number Length and Expiry Date in DateValue
+  //  4) Find Lot Number Length and Expiry Date in DateValue
     let resLotNumberList = [];
     let resExpDateList = [];
     let cutLengthForLotNumber = '';
@@ -220,11 +220,11 @@ let cleanedUpBarcodeList = [];
 
     for (var m = 0; m < cleanedUpBarcodeList.length; m++){
 
-/* Need to handle Lot Number extraction specifically for
-A152-A153 = TECHNO CSF
-A149-A151 = TECHNO CC
-A154/157/156 = TECHNO IA/WBT/U
-*/
+  /* Need to handle Lot Number extraction specifically for
+  A152-A153 = TECHNO CSF
+  A149-A151 = TECHNO CC
+  A154/157/156 = TECHNO IA/WBT/U
+  */
     const lengthOfEachBarcode = cleanedUpBarcodeList[m][0].length;
     if (matchedMasterCode[m][0] === 'A152' || 
         matchedMasterCode[m][0] === 'A153' || 
@@ -240,19 +240,19 @@ A154/157/156 = TECHNO IA/WBT/U
 
     } else {    
 
-// Note "\'" was put in front of Lot Number so that it paste correctly as text format
+  // Note "\'" was put in front of Lot Number so that it paste correctly as text format
       
       cutLengthForLotNumber = "\'" + cleanedUpBarcodeList[m][0].substring(26,26+matchedLotNumberLength[m][0]);
       toUpperCaseCutLengthForLotNumber = cutLengthForLotNumber.toUpperCase();
 
     }
-/* To extract expiry dates at different length for specific items
-A152,A153 - TECHNO CSF - extract at 27
-A148 - TECHNO A1C - extract at 18
-A157,A151,A150,A149,A154,A156 - WBT,CC,IA & U - extract at 28
-A031 - CAL CNTL CAP - exp date is empty
-For other items, extract at 18
-*/
+  /* To extract expiry dates at different length for specific items
+  A152,A153 - TECHNO CSF - extract at 27
+  A148 - TECHNO A1C - extract at 18
+  A157,A151,A150,A149,A154,A156 - WBT,CC,IA & U - extract at 28
+  A031 - CAL CNTL CAP - exp date is empty
+  For other items, extract at 18
+  */
     let lengthForExpDateToStart = 0;
     if (matchedMasterCode[m][0] === 'A152' ||
         matchedMasterCode[m][0] === 'A153'){
@@ -302,17 +302,17 @@ For other items, extract at 18
     //console.log(resExpDateList);
 
 
-//  5) Quantity as Lowest UOM = Important when outgoing stock
+  //  5) Quantity as Lowest UOM = Important when outgoing stock
     let correctedCountPerItems = matchedMultiCountsList;
 
-//console.log(correctedCountPerItems);
+  //console.log(correctedCountPerItems);
 
-//  6) QR code, paste as image OR generate as needed?
+  //  6) QR code, paste as image OR generate as needed?
     //=IMAGE("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="&ENCODEURL(ENTER VALUE HERE))
 
 
-//  8) Timestamp for all transactions
-//  Check that these dates are pasted in the correct format
+  //  8) Timestamp for all transactions
+  //  Check that these dates are pasted in the correct format
 
     let stampUpAllItemsList = [];
 
@@ -332,7 +332,7 @@ For other items, extract at 18
     }
     //console.log(stampUpAllItemsList);
   
-//  9) Collect all arrays and put into one
+  //  9) Collect all arrays and put into one
     // Column One - Date and Time
     let col2Timestamp = stampUpAllItemsList;
     // Column Two - Scanned barcode
@@ -354,7 +354,7 @@ For other items, extract at 18
     // For tblComb1 INPUT
     let resArrayListINtblComb1 = [];
 
-for (p = 0; p < col2Timestamp.length; p++) {
+  for (p = 0; p < col2Timestamp.length; p++) {
   resArrayListForIncomingStock.push(appendArrays(
     // Time stamp
     col2Timestamp[p],
@@ -376,12 +376,12 @@ for (p = 0; p < col2Timestamp.length; p++) {
     col10Quantity[p][0]
     ));
 
-}
+  }
 
-// To display in kits
-let tblIncomingDisplayList = []
-let countOfEachKit = 1;
-for (p = 0; p < col2Timestamp.length; p++) {
+  // To display in kits
+  let tblIncomingDisplayList = []
+  let countOfEachKit = 1;
+  for (p = 0; p < col2Timestamp.length; p++) {
   tblIncomingDisplayList.push(appendArrays(
     // Time stamp
     col2Timestamp[p],
@@ -403,14 +403,14 @@ for (p = 0; p < col2Timestamp.length; p++) {
     countOfEachKit
     ));
 
-}
+  }
 
-//console.log(resArrayListForIncomingStock[0][9]);
-//console.log(resArrayListForIncomingStock);
+  //console.log(resArrayListForIncomingStock[0][9]);
+  //console.log(resArrayListForIncomingStock);
 
 
-// Expand each row based on multicount to make each transaction unique
-// Autogenerate id for each row of transaction
+  // Expand each row based on multicount to make each transaction unique
+  // Autogenerate id for each row of transaction
     let addNewRowsPerCount = col10Quantity;
     //let expandRows = [];
     let tblUniqueINIDList = [];
@@ -474,10 +474,10 @@ for (p = 0; p < col2Timestamp.length; p++) {
     if (tblIncomingDisplayList[e][4] === "REAGENT"){
       cleanedUpIncomingForReagentsOnly.push([
               tblIncomingDisplayList[e][0],   // Date
-              tblIncomingDisplayList[e][3],                                         // Item Name
-              tblIncomingDisplayList[e][6],                                         // Lot Number
+              tblIncomingDisplayList[e][3],   // Item Name
+              tblIncomingDisplayList[e][6],   // Lot Number
               tblIncomingDisplayList[e][7],   // Exp Date
-              tblIncomingDisplayList[e][2],                                         // Item Code
+              tblIncomingDisplayList[e][2],   // Item Code
               ]);
     }
   }

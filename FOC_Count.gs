@@ -25,7 +25,6 @@ function updateFOCDate() {
 
 }
 
-
 function updateFOCAPM(){
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -43,7 +42,7 @@ function updateFOCAPM(){
       }
     }
   }
-//console.log(newAPMValues.sort());
+  //console.log(newAPMValues.sort());
 
   // Paste to the MasterL
   for (c = 0; c < newAPMValues.length; c++){

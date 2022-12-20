@@ -6,6 +6,9 @@ let finalStoreTransfer = []; // Global variable to make it for Store_Alinity
 let newUpdatedQOHFullList = [] // For OUTGOING list paste
 
 function updateOUTGOING() {
+
+    // var t1 = new Date().getTime();
+
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const getTblStockINLastRow = ss.getSheetByName("tblStockIN").getLastRow();
     const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
@@ -66,27 +69,30 @@ function updateOUTGOING() {
               getItemNameValue = getMasterList[l][1];
               getItemTypeValue = getMasterList[l][2];
               getItemLocationValue = getMasterList[l][3];
+              break; // New
             }
           }
          
           newUpdatedQOHFullList.push([false,
-                                     getTblUniqueINIDarray[k][0],   // UniqueProdLotExpID
-                                     getItemNameValue,              // Item Name
-                                     getItemTypeValue,              // Item Type
-                                     getItemLocationValue,          // Item Location
-                                     "'"+getTblUniqueINIDarray[k][3],   // Lot Number
-                                     getTblUniqueINIDarray[k][4]    // Exp date
-                                     ])
+                                     getTblUniqueINIDarray[k][0],     // UniqueProdLotExpID
+                                     getItemNameValue,                // Item Name
+                                     getItemTypeValue,                // Item Type
+                                     getItemLocationValue,            // Item Location
+                                     "'"+getTblUniqueINIDarray[k][3], // Lot Number
+                                     getTblUniqueINIDarray[k][4]      // Exp date
+                                     ]);
+                                     break; // New
         }
       }
     }
+    // console.log('Length of array =', newUpdatedQOHFullList.length);
 
     // Get a new list to update OUT_Alinity by the number of kits
     let newUpdatedQOHForStoreAlinity = [];
     let itemNameValue = '';
     let itemTypeValue = '';
     let itemLocationValue = '';
-        for (let j = 0; j < newUpdatedQOHuniqueIDList.length; j++){
+    for (let j = 0; j < newUpdatedQOHuniqueIDList.length; j++){
       for (let k = 0; k < getTblUniqueINIDarray.length; k++){
         
         if (newUpdatedQOHuniqueIDList[j] === getTblUniqueINIDarray[k][0]){
@@ -101,6 +107,7 @@ function updateOUTGOING() {
               itemSubLocation = getMasterList[l][4];
               itemMultiCount = getMasterList[l][7];
               itemPRtype = getMasterList[l][5];
+              break; // New
             }
           }
          
@@ -114,11 +121,12 @@ function updateOUTGOING() {
                                      itemMultiCount,
                                      itemPRtype,
                                      getTblUniqueINIDarray[k][2]                                         // Item Code
-                                     ])
+                                     ]);
+                                     break; // New
         }
       }
     }
-    //console.log(newUpdatedQOHForStoreAlinity)
+    // console.log('Length of array =', newUpdatedQOHForStoreAlinity.length); // 2128
 
     // Filter out the items based on the sublocations
     let storeAlinityTransferPending = [];
@@ -165,6 +173,10 @@ function updateOUTGOING() {
     //console.log(finalStoreOutside)
     //console.log(finalStoreSection)
 
+    // var t2 = new Date().getTime();
+    // var timeDiff = t2 - t1;
+    // console.log(timeDiff); // 2522 ms before update. Seems like no change when added breaks.
+
 }
 
 function updateOUTGOINGpaste(){
@@ -204,6 +216,8 @@ let readyArrayFortblQOHFOCpaste = []; // To make it available to Medicorp
 
 
 function updateQOHList(){
+
+    // var t1 = new Date().getTime();
 
     updateOUTGOING();
     const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -255,6 +269,7 @@ function updateQOHList(){
               getItemTypeValue = getMasterList[l][2];
               getItemLocationValue = getMasterList[l][3];
               getItemPRType = getMasterList[l][5];
+              break; // New
             }
           }
          
@@ -271,11 +286,12 @@ function updateQOHList(){
           listOfItemCodesPlusLot.push([getItemCodeValue,
                                        "'"+getTblUniqueINIDarray[k][3]]);
           listOfLotNumbers.push(["'"+getTblUniqueINIDarray[k][3]]);
+          break; // New
 
         }
       }
     }
-    //console.log(expandedListOfCurrentID);
+    // console.log('Length of array =', expandedListOfCurrentID.length); // 2128
     //console.log(listOfItemCodes)
     //console.log(listOfItemCodesPlusLot);
 
@@ -313,6 +329,7 @@ function updateQOHList(){
               getMultiCountFromMasterList = getMasterList[l][7];
               getItemTypeFromMasterList = getMasterList[l][2];
               getPRTypeFromMasterList = getMasterList[l][5];
+              // Do not add break here
 
             }
           }
@@ -325,10 +342,11 @@ function updateQOHList(){
                                      getLocationFromMasterList,               // Item Location
                                      getItemTypeFromMasterList,               // Item Type
                                      getPRTypeFromMasterList                  // PR/FOC
-                                     ])
+                                     ]);
+                                    //  Do not add break here
 
         }
-        //console.log(captureNewArray);
+        // console.log('Length of array =', captureNewArray.length); //
         //console.log(captureNewArray[0][1]);
         //console.log(captureNewArray[0][1]);
         //console.log(getTblUniqueINIDLotNumbersarray[0][0]);
@@ -383,7 +401,7 @@ function updateQOHList(){
     }
   }
 
-  //console.log(readyArrayFortblQOHPRpaste)
+  // console.log('Length of array =', readyArrayFortblQOHPRpaste.length); // 141
 
   // Search for expired items
   let prepForExpiredItems = [];
@@ -473,7 +491,7 @@ function updateQOHList(){
 
     }
   }
-}
+  }
     //console.log(readyArrayFortblQOHPRpaste);
     //console.log(filteredQOHPRList);
 
@@ -590,7 +608,7 @@ function updateQOHList(){
 
     }
   }
-}
+  }
     //console.log(filteredQOHFOCList);
     //console.log(readyArrayFortblQOHFOCpaste);
     
@@ -633,6 +651,10 @@ function updateQOHList(){
     ss.getSheetByName("EXPIRED").getRange(2,1,lookForExpiredItems.length,lookForExpiredItems[0].length).setValues(lookForExpiredItems);
     ss.getSheetByName("EXPIRED").getRange(1,1,lookForExpiredItems.length+1,7).createFilter();
     ss.getSheetByName("EXPIRED").getRange(2,4,lookForExpiredItems.length+1,1).setNumberFormat("DD/MM/YYYY");
+
+    // var t2 = new Date().getTime();
+    // var timeDiff = t2 - t1;
+    // console.log(timeDiff); // 13362 ms before update. Looks like adding breaks didn't help.
 
 
 }
@@ -777,7 +799,9 @@ function updatePOEntry() {
                           getActivePRList[c][3],  // Item Name
                           getActivePRList[c][4],  // Item Type
                           getActivePRList[c][6],  // Quantity Ordered
-      ])}}};
+      ])}
+      }
+      };
       //console.log(listForPOEntry);
       //console.log(getPOEntryLastRow);
 
@@ -808,6 +832,8 @@ function updatePOEntry() {
 }
 
 function updateDOEntry() {
+
+    // var t1 = new Date().getTime();
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const getTblPRLastRow = ss.getSheetByName("tblPR").getLastRow();
@@ -902,11 +928,14 @@ function updateDOEntry() {
       if (fullArrayOfINList[d][0] === todayDateInDateMonthYear){
         let getItemCodeValue = fullArrayOfINList[d][3];
         //let getMultiCountValue = 0;
+        /*
+        This section is not useful
         for (e = 0; e < getMasterList.length; e++){
           if (getItemCodeValue === getMasterList[e][0]){
             //getMultiCountValue = getMasterList[e][7];
-}
-}    
+          }
+        }
+        */   
           modifiedArrayOfINList.push([
           fullArrayOfINList[d][3],
           //fullArrayOfINList[d][9]  //getMultiCountValue// Do not divide quantity by Multicount
@@ -916,9 +945,9 @@ function updateDOEntry() {
             fullArrayOfINList[d][3],
             fullArrayOfINList[d][9]
           ]);
-}
-}
-  //console.log(modifiedArrayOfINList);
+  }
+  }
+  // console.log('Length of array =', modifiedArrayOfINList.length); // 14
 
   // Calculate same item to be summed up
   let countModifiedArrayOfINList = countArrayElem(modifiedArrayOfINList);
@@ -999,6 +1028,11 @@ function updateDOEntry() {
       getDOEntryLastRow = ss.getSheetByName("DO Entry").getLastRow();
       ss.getSheetByName("DO Entry").getRange(5,1,getDOEntryLastRow-4,1).insertCheckboxes();
       }
+
+      // var t2 = new Date().getTime();
+      // var timeDiff = t2 - t1;
+      // console.log(timeDiff); // 4235 ms before update. No update made
+
 }
 
 let extractINLISTDayMonthYearWithFullList = []; // Array ready for DO entry
@@ -1061,8 +1095,8 @@ function updateBestExp() {
     for (j = 0; j < getListOfCurrentPOarray.length; j++){
       if (getListOfCurrentPRarray[i][1] === getListOfCurrentPOarray[j][2]){
           carryThePOMatchValue = getListOfCurrentPOarray[j][1];
-}
-}
+  }
+  }
           onlyQuantityLeftPRlist.push([
                   getListOfCurrentPRarray[i][1],  // PR Number
                   carryThePOMatchValue,           // PO Number
@@ -1072,17 +1106,17 @@ function updateBestExp() {
                   getListOfCurrentPRarray[i][6],  // Quantity Ordered
                   getListOfCurrentPRarray[i][7]   // Quantity Remaining
                   ])
-}
-}
-//console.log(onlyQuantityLeftPRlist);
+  }
+  }
+  //console.log(onlyQuantityLeftPRlist);
 
-// Need to clear up BestExp table to handle different length of Incomplete PR list
-if (getBestExpLastRow-3 === 0){
-} else {ss.getSheetByName("BestExp").getRange(4,1,getBestExpLastRow-3,8).clearContent();
-}
+  // Need to clear up BestExp table to handle different length of Incomplete PR list
+  if (getBestExpLastRow-3 === 0){
+  } else {ss.getSheetByName("BestExp").getRange(4,1,getBestExpLastRow-3,8).clearContent();
+  }
 
-// Paste the updated list of Incomplete PR to BestExp table
-ss.getSheetByName("BestExp").getRange(4,1,onlyQuantityLeftPRlist.length,onlyQuantityLeftPRlist[0].length).setValues(onlyQuantityLeftPRlist);
+  // Paste the updated list of Incomplete PR to BestExp table
+  ss.getSheetByName("BestExp").getRange(4,1,onlyQuantityLeftPRlist.length,onlyQuantityLeftPRlist[0].length).setValues(onlyQuantityLeftPRlist);
 
 }
 
@@ -1097,8 +1131,9 @@ function updateBatchNumber() {
     ss.getSheetByName("Batch List").getRange(1,2,1,1).setDataValidation(getUniqueListofBatchNumber);
 }
 
-
 function updateBatchList() {
+
+    // var t1 = new Date().getTime();
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const getBestExpListLastRow = ss.getSheetByName("tblBestExp").getLastRow();
@@ -1144,9 +1179,10 @@ function updateBatchList() {
     for (t = 0; t < listOfQOHSingleCount.length; t++){
     for (u = 0; u < getListOfUniqueID.length; u++){
         
-        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0] )
+        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0]){
         
         getItemCodeValueForLookUp = getListOfUniqueID[u][2];
+        // Do not add break here
         
     for (v = 0; v < getMasterList.length; v++){
         
@@ -1154,10 +1190,12 @@ function updateBatchList() {
             getAPMValue = getMasterList[v][8];
             getTestPerKitValue = getMasterList[v][12];
             getMultiCountValue = getMasterList[v][7];
+            break; // New
             
           }
         }
       }
+    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -1169,7 +1207,7 @@ function updateBatchList() {
             getItemCodeValueForLookUp
             ])
     }
-//console.log(extractListOfQOH)
+  // console.log(extractListOfQOH.length)
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOHListForCount);
@@ -1197,6 +1235,7 @@ function updateBatchList() {
          getTestPerKitFromArray = countExtractListOfQOHWithAPMandTestPerKit[x][2];
          getMultiCountFromArray = countExtractListOfQOHWithAPMandTestPerKit[x][3];
          getQOHLastValue = getQOHValue / getMultiCountFromArray / getAPMValueFromArray;
+         break; // New
     }
     }
     countedQOHListWithQOHlastarray.push([
@@ -1228,15 +1267,15 @@ function updateBatchList() {
         getTestPerKitZero
       ])
     }
-//console.log(toBeConcatWithMainQOH)
+  //console.log(toBeConcatWithMainQOH)
 
     let newArrayForCounting = countedQOHListWithQOHlastarray.concat(toBeConcatWithMainQOH);
 
-let getTheBatchListFromChoosenBatchNumber = [];
-let getInfoArrayForNewCalculation = [];
+  let getTheBatchListFromChoosenBatchNumber = [];
+  let getInfoArrayForNewCalculation = [];
 
 
-    for (i = 0; i < getListOfBestExparray.length; i++){
+  for (i = 0; i < getListOfBestExparray.length; i++){
 
     for (j = 0; j < newArrayForCounting.length; j++){
           
@@ -1289,17 +1328,18 @@ let getInfoArrayForNewCalculation = [];
                   getAPMFromQOH,          // 14th column
                   getTestPerKitFromQOH    // 15th column
         ]);
+        break; // New
     }
   }
-}
-//console.log(getInfoArrayForNewCalculation);
-//console.log('QOH Last: '+getQOHLastFromQOH);
-//console.log('Get APM: '+getAPMFromQOH);
-//console.log(getTheBatchListFromChoosenBatchNumber);
+  }
+  //console.log(getInfoArrayForNewCalculation);
+  //console.log('QOH Last: '+getQOHLastFromQOH);
+  //console.log('Get APM: '+getAPMFromQOH);
+  //console.log(getTheBatchListFromChoosenBatchNumber);
 
-// Go through each item to calculate the acceptable quantity
-let resOfAcceptableQuantArray = [];
-for (k = 0; k < getInfoArrayForNewCalculation.length; k++){
+  // Go through each item to calculate the acceptable quantity
+  let resOfAcceptableQuantArray = [];
+  for (k = 0; k < getInfoArrayForNewCalculation.length; k++){
 
     arrayOfListToCountAcceptableKit = makeArrayListOfNewOrderBasedOnTest(getInfoArrayForNewCalculation[k][3],  // Test per kit
                                                                          getInfoArrayForNewCalculation[k][4],  // APM
@@ -1314,24 +1354,24 @@ for (k = 0; k < getInfoArrayForNewCalculation.length; k++){
                 getInfoArrayForNewCalculation[k][2], // Item Code
                 resOfAcceptableQuant                 // Acceptable Quantity
                 ]);
-}
-//console.log(resOfAcceptableQuantArray);
+  }
+  //console.log(resOfAcceptableQuantArray);
 
-// Combine all these arrays, try with simple push first without matching PR, PO and Item - assuming all rows are the same
+  // Combine all these arrays, try with simple push first without matching PR, PO and Item - assuming all rows are the same
 
-const today = new Date();
-const convertToSeconds = 4*7*24*60*60*1000;
-//newQOHLastDate = new Date(today.getTime()+(newPRoverAPMplusQOHlast*convertToSeconds));
+  const today = new Date();
+  const convertToSeconds = 4*7*24*60*60*1000;
+  //newQOHLastDate = new Date(today.getTime()+(newPRoverAPMplusQOHlast*convertToSeconds));
 
 
-let finalArrayOfBatchList = [];
-for (l = 0; l < getTheBatchListFromChoosenBatchNumber.length; l++){
+  let finalArrayOfBatchList = [];
+  for (l = 0; l < getTheBatchListFromChoosenBatchNumber.length; l++){
 
-// New estimated date for QOH + Acceptable Quantity
-newQOHLast = getTheBatchListFromChoosenBatchNumber[l][13] * convertToSeconds;
-newQOHplusBOLast = (getTheBatchListFromChoosenBatchNumber[l][13] + (resOfAcceptableQuantArray[l][3]/getTheBatchListFromChoosenBatchNumber[l][14])) * convertToSeconds;
-//console.log(newQOHLast)
-//console.log(newQOHplusBOLast)
+  // New estimated date for QOH + Acceptable Quantity
+  newQOHLast = getTheBatchListFromChoosenBatchNumber[l][13] * convertToSeconds;
+  newQOHplusBOLast = (getTheBatchListFromChoosenBatchNumber[l][13] + (resOfAcceptableQuantArray[l][3]/getTheBatchListFromChoosenBatchNumber[l][14])) * convertToSeconds;
+  //console.log(newQOHLast)
+  //console.log(newQOHplusBOLast)
 
   finalArrayOfBatchList.push([
     getTheBatchListFromChoosenBatchNumber[l][0],  // PR Number
@@ -1353,21 +1393,25 @@ newQOHplusBOLast = (getTheBatchListFromChoosenBatchNumber[l][13] + (resOfAccepta
     getTheBatchListFromChoosenBatchNumber[l][12]  // Manual Remarks
     ]);
 
-}
-//console.log(finalArrayOfBatchList)
+  }
+  // console.log(finalArrayOfBatchList)
 
-// Clear Batch List first if Batch Number changes
-if (getBatchListLastRow-3 === 0){
-} else {ss.getSheetByName("Batch List").getRange(4,1,getBatchListLastRow-3,15).clearContent().removeCheckboxes();
-}
+  // Clear Batch List first if Batch Number changes
+  if (getBatchListLastRow-3 === 0){
+  } else {ss.getSheetByName("Batch List").getRange(4,1,getBatchListLastRow-3,15).clearContent().removeCheckboxes();
+  }
 
-// Paste the Batch List Based on the choosen Batch Number
-ss.getSheetByName("Batch List").getRange(4,1,finalArrayOfBatchList.length,finalArrayOfBatchList[0].length).setValues(finalArrayOfBatchList);
+  // Paste the Batch List Based on the choosen Batch Number
+  ss.getSheetByName("Batch List").getRange(4,1,finalArrayOfBatchList.length,finalArrayOfBatchList[0].length).setValues(finalArrayOfBatchList);
 
-getBatchListLastRow = ss.getSheetByName("Batch List").getLastRow(); // To update the length of new Batch List
+  getBatchListLastRow = ss.getSheetByName("Batch List").getLastRow(); // To update the length of new Batch List
 
-ss.getSheetByName("Batch List").getRange(4,12,getBatchListLastRow-3,1).insertCheckboxes();
+  ss.getSheetByName("Batch List").getRange(4,12,getBatchListLastRow-3,1).insertCheckboxes();
 
+
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t1;
+  // console.log(timeDiff); // 47354 ms before update to around 5000 ms, reduced by 89.4%, when breaks were added!
 
 
 }

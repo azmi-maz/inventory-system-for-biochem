@@ -44,6 +44,7 @@ function getStoreFOCOutgoing() {
                     countEachRow,
                     itemUOM,
                     ]);
+                    break; // New
           }
         }
       }
@@ -94,7 +95,7 @@ function getStoreFOCOutgoing() {
                     countedArrayList[e][0].split(",")[2],  // Lot Number
                     countedArrayList[e][0].split(",")[3],  // Exp Date
                     resOfDivision,                         // Count in UOM
-                    countedArrayList[e][0].split(",")[5]  // UOM
+                    countedArrayList[e][0].split(",")[5]   // UOM
                     ]);
   }
   //console.log(countedFilteredStoreFOCItemsList)

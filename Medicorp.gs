@@ -35,23 +35,23 @@ function toDisplayBatch() {
         getBatchArray[a][7],  // Item Type
         getBatchArray[a][8],  // Quantity Ordered
         getBatchArray[a][9],  // Quantity Remaining
-        getBatchArray[a][11],  // Acceptable Quantity
-        getBatchArray[a][10],  // Exp Date Offered
+        getBatchArray[a][11], // Acceptable Quantity
+        getBatchArray[a][10], // Exp Date Offered
         getBatchArray[a][15]  // Remarks
       ])
     }
   }
 
-if (getMediBatchLastRow-1 === 0){
-} else {
- mediSheet.getSheetByName("Batch List").getRange(2,1,getMediBatchLastRow-1,11).clearContent();
-}
+  if (getMediBatchLastRow-1 === 0){
+  } else {
+  mediSheet.getSheetByName("Batch List").getRange(2,1,getMediBatchLastRow-1,11).clearContent();
+  }
 
-mediSheet.getSheetByName("Batch List").getRange(2,1,toDisplayList.length,toDisplayList[0].length).setValues(toDisplayList).sort([{column: 1,ascending: false},{column: 3,ascending: true},{column: 5,ascending: true}]);
+  mediSheet.getSheetByName("Batch List").getRange(2,1,toDisplayList.length,toDisplayList[0].length).setValues(toDisplayList).sort([{column: 1,ascending: false},{column: 3,ascending: true},{column: 5,ascending: true}]);
 
-// Successful message box after running the script
-const promptForSuccess = SpreadsheetApp.getUi().alert("Updated displayed Medicorp batch list", SpreadsheetApp.getUi().ButtonSet.OK);
-SpreadsheetApp.getActive().toast(promptForSuccess);
+  // Successful message box after running the script
+  const promptForSuccess = SpreadsheetApp.getUi().alert("Updated displayed Medicorp batch list", SpreadsheetApp.getUi().ButtonSet.OK);
+  SpreadsheetApp.getActive().toast(promptForSuccess);
 
 
 }

@@ -106,7 +106,6 @@ function styleStoreSheet() {
 
 }
 
-
 function styleStoreSheetReadableHeight() {
  
   const spreadsheet = SpreadsheetApp.getActive();
@@ -182,6 +181,7 @@ function styleStoreSheetReadableHeight() {
   spreadsheet.getActiveSheet().setRowHeight(35, 25);
   spreadsheet.getRange('36:36').activate();
   spreadsheet.getActiveSheet().setRowHeight(36, 25);
+  spreadsheet.getRange('J1').activate();
 
 }
 

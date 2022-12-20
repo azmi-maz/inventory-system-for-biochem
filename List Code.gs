@@ -52,7 +52,7 @@ function getUpdatedListCode() {
     findTheLastestListCode.push([a,getItemCodeList[a],listCodeFormat]);
     } else {
   }
-}
+  }
   //console.log(findTheLastestListCode);
 
   // Paste to MasterL

@@ -1,5 +1,7 @@
 function outgoingStock() {
   
+  var t1 = new Date().getTime();
+
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
 
@@ -30,7 +32,7 @@ function outgoingStock() {
   //console.log(listOfChoosenUniqueIDs);
 
   // Timestamp
-let stampUpAllItemsList = [];
+  let stampUpAllItemsList = [];
 
     for (var n = 0; n < listOfChoosenItems.length; n++){
     const today = new Date();
@@ -46,7 +48,7 @@ let stampUpAllItemsList = [];
 
       stampUpAllItemsList.push(time);
     }
-//console.log(stampUpAllItemsList);
+  //console.log(stampUpAllItemsList);
 
   // Use Unique ID to extract Item code, name, type, location, lot number, and expiry date
 
@@ -68,11 +70,13 @@ let stampUpAllItemsList = [];
           matchedItemNameValue = getMasterList[t][1];
           matchedItemTypeValue = getMasterList[t][2];
           matchedItemLocationValue = getMasterList[t][3];
+          break; // New
         }
       }
       matchedItemCodeValue = getTblUniqueINIDarray[s][2];
       matchedLotNumberValue = getTblUniqueINIDarray[s][3];
       matchedExpDateValue = getTblUniqueINIDarray[s][4];
+      break; // New
     }                    
   }
     extractedItemInfoList.push([listOfChoosenUniqueIDs[r], // UniqueProdLotExpID
@@ -83,9 +87,9 @@ let stampUpAllItemsList = [];
                              matchedLotNumberValue,        // Lot Number
                              matchedExpDateValue           // Expiry Date
                              ]);
-}
+  }
 
-//console.log(extractedItemInfoList[0][1]);
+  // console.log('Length of array =', extractedItemInfoList.length); // 3
 
   let blankUpCol = [];
 
@@ -97,8 +101,8 @@ let stampUpAllItemsList = [];
     }
 
 
-  // Quantity
-let countOutgoingItems = [];
+ // Quantity
+  let countOutgoingItems = [];
 
   for (var m = 0; m < listOfChoosenItems.length; m++){
     const countOutgoingVal = 1;
@@ -107,9 +111,9 @@ let countOutgoingItems = [];
     countOutgoingItems.push([countOutgoingVal]);
 
   }
-//console.log(countOutgoingItems);
+  //console.log(countOutgoingItems);
 
-//  11) Collect all arrays and put into one
+  //  11) Collect all arrays and put into one
     //let col1TransactionId = 
 
     // Column One - Date and Time
@@ -126,7 +130,7 @@ let countOutgoingItems = [];
     // For tblStockOUT
     let resArrayListToUpdateTblStockOut = [];
 
-for (r = 0; r < col1Timestamp.length; r++) {
+  for (r = 0; r < col1Timestamp.length; r++) {
   resArrayListForOutgoingStock.push(appendArrays(
     col1Timestamp[r],                // Timestamp
     col2FromUniqueID[r][0],          // UniqueProdLotExpID
@@ -145,31 +149,35 @@ for (r = 0; r < col1Timestamp.length; r++) {
     col9Quantity[r][0]               // Quantity out
   ));
 
-}
+  }
 
-//console.log(resArrayListForOutgoingStock);
-// To paste the array to OUT LIST sheet
-ss.getSheetByName("OUT LIST").getRange(getOUTListLastRow+1,1,resArrayListForOutgoingStock.length,resArrayListForOutgoingStock[0].length).setValues(resArrayListForOutgoingStock);
+  // console.log(resArrayListForOutgoingStock);
 
-//console.log(resArrayListToUpdateTblStockOut);
-// To paste the array to tblStockOUT sheet
-// To auto add to existing date; Note: To add 1 so to append to new row without the deleting the previous record
-ss.getSheetByName("tblStockOUT").getRange(getTblStockOUTLastRow+1,1,resArrayListToUpdateTblStockOut.length,resArrayListToUpdateTblStockOut[0].length).setValues(resArrayListToUpdateTblStockOut);
+  // To paste the array to OUT LIST sheet
+  ss.getSheetByName("OUT LIST").getRange(getOUTListLastRow+1,1,resArrayListForOutgoingStock.length,resArrayListForOutgoingStock[0].length).setValues(resArrayListForOutgoingStock);
 
-ss.getSheetByName("OUTGOING").getRange(1,4,1,1).setValue('Please click the update button!');
-let getOutgoingListLastRow = ss.getSheetByName("OUTGOING").getLastRow();
+  //console.log(resArrayListToUpdateTblStockOut);
+  // To paste the array to tblStockOUT sheet
+  // To auto add to existing date; Note: To add 1 so to append to new row without the deleting the previous record
+  ss.getSheetByName("tblStockOUT").getRange(getTblStockOUTLastRow+1,1,resArrayListToUpdateTblStockOut.length,resArrayListToUpdateTblStockOut[0].length).setValues(resArrayListToUpdateTblStockOut);
 
-if (getOutgoingListLastRow === 1){
-} else { 
-ss.getSheetByName("OUTGOING").getRange(3,1,getOutgoingListLastRow-1,7).clearContent().removeCheckboxes();
-// Remove the filter set by user
-ss.getSheetByName("OUTGOING").getRange(3,1,getOutgoingListLastRow-1,7).getFilter().remove();
-}
-ss.getSheetByName("OUTGOING").getRange(3,3,1,1).setValue('Empty List');
-ss.getSheetByName("OUTGOING").getRange(2,1,2,7).createFilter();
-//updateQOHList();
-//updateOUTGOINGpaste();
+  ss.getSheetByName("OUTGOING").getRange(1,4,1,1).setValue('Please click the update button!');
+  let getOutgoingListLastRow = ss.getSheetByName("OUTGOING").getLastRow();
 
+  if (getOutgoingListLastRow === 1){
+  } else { 
+  ss.getSheetByName("OUTGOING").getRange(3,1,getOutgoingListLastRow-1,7).clearContent().removeCheckboxes();
+  // Remove the filter set by user
+  ss.getSheetByName("OUTGOING").getRange(3,1,getOutgoingListLastRow-1,7).getFilter().remove();
+  }
+  ss.getSheetByName("OUTGOING").getRange(3,3,1,1).setValue('Empty List');
+  ss.getSheetByName("OUTGOING").getRange(2,1,2,7).createFilter();
 
+  //updateQOHList();
+  //updateOUTGOINGpaste();
+
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t2;
+  // console.log(timeDiff); // 0 ms before and after adding breaks.
   
 }

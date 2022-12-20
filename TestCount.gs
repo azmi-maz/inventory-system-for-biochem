@@ -66,7 +66,6 @@ function getTestCount() {
 
 }
 
-
 function fillInTheBlanks() {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -96,7 +95,6 @@ function fillInTheBlanks() {
   }
 }
 
-
 function countComp() {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -109,7 +107,7 @@ function countComp() {
   let compCountList = ss.getSheetByName("CountComp").getRange(2,1,getCountCompLastRow-1,13).getValues();
   //console.log(getTestCountDataHeaderVal)
 
-//___________________________________________________________________
+  //___________________________________________________________________
   // Fill up CountComp with datevalues
   let getDateValues = [];
  for (b = 0; b < compCountList.length; b++){ 
@@ -121,14 +119,13 @@ function countComp() {
       ]);
     }
   }
- }
- ss.getSheetByName("CountComp").getRange(2,3,getDateValues.length,getDateValues[0].length).setValues(getDateValues);
+  }
+  ss.getSheetByName("CountComp").getRange(2,3,getDateValues.length,getDateValues[0].length).setValues(getDateValues);
 
- updateAPM();
- //___________________________________________________________________
+  updateAPM();
+  //___________________________________________________________________
 
 } 
-
 
 function updateAPM(){
 
@@ -147,11 +144,11 @@ function updateAPM(){
       }
     }
   }
-//console.log(newAPMValues);
+  //console.log(newAPMValues);
 
-// Paste to the MasterL
-for (c = 0; c < newAPMValues.length; c++){
-  ss.getSheetByName("MasterL").getRange(newAPMValues[c][0]+2,9,1,1).setValue(newAPMValues[c][1]);
-}
+  // Paste to the MasterL
+  for (c = 0; c < newAPMValues.length; c++){
+    ss.getSheetByName("MasterL").getRange(newAPMValues[c][0]+2,9,1,1).setValue(newAPMValues[c][1]);
+  }
 
 }

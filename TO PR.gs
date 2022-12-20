@@ -4,15 +4,17 @@
 
 function lookForItemsBelowPar() {
   
+  // var t1 = new Date().getTime();
+
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const getMasterListLastCol = ss.getSheetByName("MasterL").getLastColumn();
   const getToPRLastRow = ss.getSheetByName("To PR").getLastRow();
 
   let getMasterListArray = ss.getSheetByName("MasterL").getRange(2,1,getMasterListLastRow-1,getMasterListLastCol).getValues();
 
-// Start copy of code from BO-QOH<MTH
-//-------------------------------------------------------------------------------------------------------------------
-// To Update List of QOH
+  // Start copy of code from BO-QOH<MTH
+  //-------------------------------------------------------------------------------------------------------------------
+  // To Update List of QOH
     const getTblUniqueINIDLastRow = ss.getSheetByName("tblUniqueINID").getLastRow();
     const getTblPRLastRow = ss.getSheetByName("tblPR").getLastRow();
 
@@ -33,9 +35,10 @@ function lookForItemsBelowPar() {
     for (t = 0; t < listOfQOHSingleCount.length; t++){
     for (u = 0; u < getListOfUniqueID.length; u++){
         
-        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0] )
+        if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0]){
         
         getItemCodeValueForLookUp = getListOfUniqueID[u][2];
+        // Add break here?
         
     for (v = 0; v < getMasterList.length; v++){
         
@@ -44,10 +47,12 @@ function lookForItemsBelowPar() {
             getTestPerKitValue = getMasterList[v][12];
             getMultiCountValue = getMasterList[v][7];
             getItemType = getMasterList[v][2];
+            break; // New
             
           }
         }
       }
+    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -60,7 +65,7 @@ function lookForItemsBelowPar() {
             getItemCodeValueForLookUp
             ])
     }
-//console.log(extractListOfQOH)
+  //console.log(extractListOfQOH)
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOHListForCount);
@@ -89,6 +94,7 @@ function lookForItemsBelowPar() {
          getItemTypeFromArray = countExtractListOfQOHWithAPMandTestPerKit[x][4];
          getQOHinBoxes = getQOHValue / getMultiCountFromArray;
          getQOHLastValue = getQOHValue / getMultiCountFromArray / getAPMValueFromArray;
+         break; // New
     }
     }
     countedQOHListWithQOHlastarray.push([
@@ -157,21 +163,22 @@ function lookForItemsBelowPar() {
                     qohPlusBOLastInDateFormat                  // QOH + BO in months date format
                     ]);
       resArrayForPendingBOJustItemCodes.push(countAllPendingBOBasedOnItemCodes[b][1]);
+      break; // New
 
 
     }
   }
-}
-//console.log(resArrayForPendingBO)
-//console.log(resArrayForPendingBO.length)
-//console.log(typeof countAllPendingBOBasedOnItemCodesJustCodes[0])
-//console.log(typeof countAllPendingBOBasedOnItemCodes[0][1])
+  }
+  //console.log(resArrayForPendingBO)
+  //console.log(resArrayForPendingBO.length)
+  //console.log(typeof countAllPendingBOBasedOnItemCodesJustCodes[0])
+  //console.log(typeof countAllPendingBOBasedOnItemCodes[0][1])
 
-findRemainingUniqueID(countAllPendingBOBasedOnItemCodesJustCodes.sort(),resArrayForPendingBOJustItemCodes.sort());
+  findRemainingUniqueID(countAllPendingBOBasedOnItemCodesJustCodes.sort(),resArrayForPendingBOJustItemCodes.sort());
 
-let newBOArray = [];
-for (a = 0; a < countAllPendingBOBasedOnItemCodesJustCodes.length; a++){
-  for (b = 0; b < countAllPendingBOBasedOnItemCodes.length; b++){
+  let newBOArray = [];
+  for (a = 0; a < countAllPendingBOBasedOnItemCodesJustCodes.length; a++){
+    for (b = 0; b < countAllPendingBOBasedOnItemCodes.length; b++){
 
     if (countAllPendingBOBasedOnItemCodesJustCodes[a] === countAllPendingBOBasedOnItemCodes[b][1]){
       newBOArray.push([
@@ -179,16 +186,17 @@ for (a = 0; a < countAllPendingBOBasedOnItemCodesJustCodes.length; a++){
         countAllPendingBOBasedOnItemCodes[b][1],    // Item Code
         countAllPendingBOBasedOnItemCodes[b][2],    // Item Name
         countAllPendingBOBasedOnItemCodes[b][3]    // Pending BO in Boxes
-      ])
+      ]);
+      break; // New
     }
   }
-}
-//console.log(newBOArray)
+  }
+  //console.log(newBOArray)
 
-let toAddOnArray = [];
+  let toAddOnArray = [];
 
-for (a = 0; a < newBOArray.length; a++){
-  for (b = 0; b < getMasterList.length; b++){
+  for (a = 0; a < newBOArray.length; a++){
+    for (b = 0; b < getMasterList.length; b++){
       
       const today3 = new Date();
       qohLastValue = 0;
@@ -214,15 +222,16 @@ for (a = 0; a < newBOArray.length; a++){
                     qohLastInDateFormat,                                // QOH last in date
                     qohPlusBOLastInDateFormat                           // QOH + BO in months date format
                     ]);
+                    break; // New
       }
     }
   }
-//console.log(toAddOnArray)
+  //console.log(toAddOnArray)
 
-let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
+  let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
 
-// End copy of code from BO-QOH<MTH
-//-------------------------------------------------------------------------------------------------------------------
+  // End copy of code from BO-QOH<MTH
+  //-------------------------------------------------------------------------------------------------------------------
 
 
   // Only look for PR items array and find their QOH, par level
@@ -254,7 +263,7 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
   //console.log(findPRItemsOnly)
 
 
-// Multiple loops of filters start here
+  // Multiple loops of filters start here
 
   // Use to filter out
   let fullArrayQOHandBO = [];
@@ -273,7 +282,7 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
   let reorderQty = 0;
 
 
-// QOH+BO < Par Level
+  // QOH+BO < Par Level
   for (a = 0; a < findPRItemsOnly.length; a++){
     for (b = 0; b < concatResArrayForPendingBO.length; b++){
 
@@ -284,7 +293,8 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
         fullArrayQOHandBO.push(
         concatResArrayForPendingBO[b][1]
         );
-}
+        break; // New
+  }
 
       if (findPRItemsOnly[a][0] === concatResArrayForPendingBO[b][1] &&
           concatResArrayForPendingBO[b][7] <= parlevel){   //   ORIGINAL is <= parlevel
@@ -326,23 +336,25 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
               ]);
 
             ordQOHBOItemCodeLessPar.push(concatResArrayForPendingBO[b][1]);
+            break; // New
 
       } else
 
           if (findPRItemsOnly[a][0] === concatResArrayForPendingBO[b][1] &&
           concatResArrayForPendingBO[b][7] > parlevel){
 
-            ordQOHBOItemCodeMorePar.push(concatResArrayForPendingBO[b][1])
+            ordQOHBOItemCodeMorePar.push(concatResArrayForPendingBO[b][1]);
+            break; // New
 
       }
     }
   }
-//console.log(fullArrayQOHandBO)
-//console.log(ordQOHBOItemCodeLessPar);
-//console.log(ordQOHBOItemCodeMorePar);
+  //console.log(fullArrayQOHandBO)
+  //console.log(ordQOHBOItemCodeLessPar);
+  //console.log(ordQOHBOItemCodeMorePar);
 
 
-// QOH < Par Level
+  // QOH < Par Level
   for (a = 0; a < findPRItemsOnly.length; a++){
     for (b = 0; b < countedQOHListWithQOHlastarray.length; b++){
 
@@ -350,6 +362,7 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
         fullArrayQOH.push(
           countedQOHListWithQOHlastarray[b][0]
         );
+        break; // New
       }
     }
   }
@@ -407,29 +420,31 @@ let concatResArrayForPendingBO = resArrayForPendingBO.concat(toAddOnArray);
                         ]);
               
               ordQOHItemCodesLessPar.push(countedQOHListWithQOHlastarray[b][0]);
+              break; // New
 
         } else if (countedQOHListWithQOHlastarray[b][3] > parlevel){
 
               ordQOHItemCodesMorePar.push(countedQOHListWithQOHlastarray[b][0]);
+              break; // New
         }
       }
     } 
   }
-}
-//console.log(needToOrderQOH)
+  }
+  //console.log(needToOrderQOH)
 
-// To append to needToOrderQOH for last PO value
+  // To append to needToOrderQOH for last PO value
   let matchedLastPOvalueforQOHArray = findLastPOforQOH();
   //console.log(matchedLastPOvalueforQOHArray);
 
-// To append to needToOrderQOHBO for last PO value
+  // To append to needToOrderQOHBO for last PO value
   let matchedLastPOvalueforQOHBOArray = findLastPOforQOHBO();
   //console.log(matchedLastPOvalueforQOHBOArray.length);
   //console.log(needToOrderQOHandBO.length);
 
-// Append QOH+BO with their last PO values
-let firstAppendOfQOHBO = [];
-for (a = 0; a < needToOrderQOHandBO.length; a++){
+  // Append QOH+BO with their last PO values
+  let firstAppendOfQOHBO = [];
+  for (a = 0; a < needToOrderQOHandBO.length; a++){
 
     firstAppendOfQOHBO.push([
                           needToOrderQOHandBO[a][1],            // Item Code
@@ -449,11 +464,11 @@ for (a = 0; a < needToOrderQOHandBO.length; a++){
                           matchedLastPOvalueforQOHBOArray[a],   // Last PO
                           needToOrderQOHandBO[a][16]            // Company
     ])
-}
-//console.log(firstAppendOfQOHBO)
+  }
+  //console.log(firstAppendOfQOHBO)
 
-let firstAppendOfQOH = [];
-for (a = 0; a < needToOrderQOH.length; a++){
+  let firstAppendOfQOH = [];
+  for (a = 0; a < needToOrderQOH.length; a++){
 
     firstAppendOfQOH.push([
                           needToOrderQOH[a][0],               // Item Code
@@ -473,25 +488,25 @@ for (a = 0; a < needToOrderQOH.length; a++){
                           matchedLastPOvalueforQOHArray[a],   // Last PO
                           needToOrderQOH[a][15]               // Company
     ])
-}
-//console.log(firstAppendOfQOH)
+  }
+  //console.log(firstAppendOfQOH)
 
-// Final loop to find true zero items
+  // Final loop to find true zero items
 
-findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHBOItemCodeLessPar.sort());
-//console.log(getItemCodesOnly);
-findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHBOItemCodeMorePar.sort());
-//console.log(getItemCodesOnly);
-findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHItemCodesLessPar.sort());
-//console.log(getItemCodesOnly);
-findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHItemCodesMorePar.sort());
-//console.log(getItemCodesOnly);
-
-
-let arrayOfEmptyQOH = [];
+  findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHBOItemCodeLessPar.sort());
+  //console.log(getItemCodesOnly);
+  findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHBOItemCodeMorePar.sort());
+  //console.log(getItemCodesOnly);
+  findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHItemCodesLessPar.sort());
+  //console.log(getItemCodesOnly);
+  findRemainingUniqueID(getItemCodesOnly.sort(),ordQOHItemCodesMorePar.sort());
+  //console.log(getItemCodesOnly);
 
 
-const today2 = new Date();
+  let arrayOfEmptyQOH = [];
+
+
+  const today2 = new Date();
   let reorderQty3 = 0;
   //  let matchItemCode = []; // Make variable global
 
@@ -536,16 +551,17 @@ const today2 = new Date();
                                                                  // Need to append Last PO value from a different array, length must match
                         findPRItemsOnly[c][9]                    // Company
                         ]);
+                        break; // New
 
       }
     } 
   }
 
 
-let matchedLastPOvalueforZeroQOH = findLastPOforZeroQOH();
+  let matchedLastPOvalueforZeroQOH = findLastPOforZeroQOH();
 
-let firstAppendOfZeroQOH = [];
-for (a = 0; a < arrayOfEmptyQOH.length; a++){
+  let firstAppendOfZeroQOH = [];
+  for (a = 0; a < arrayOfEmptyQOH.length; a++){
 
     firstAppendOfZeroQOH.push([
                           arrayOfEmptyQOH[a][0],               // Item Code
@@ -565,24 +581,30 @@ for (a = 0; a < arrayOfEmptyQOH.length; a++){
                           matchedLastPOvalueforZeroQOH[a],     // Last PO
                           arrayOfEmptyQOH[a][15]               // Company
     ])
-}
-//console.log(firstAppendOfZeroQOH)
+  }
+  //console.log(firstAppendOfZeroQOH)
 
-// Last combine the two arrays using concat
-let finalAppendedArrayList = firstAppendOfQOHBO.concat(firstAppendOfQOH).concat(firstAppendOfZeroQOH);
+  // Last combine the two arrays using concat
+  let finalAppendedArrayList = firstAppendOfQOHBO.concat(firstAppendOfQOH).concat(firstAppendOfZeroQOH);
 
-// Clear off the sheet to prep for new array result
-if (getToPRLastRow-1 === 0){
-} else {
-ss.getSheetByName("To PR").getRange(3,1,getToPRLastRow-1,16).clearContent();
-}
+  // console.log(finalAppendedArrayList);
 
-// Paste the final array to the To PR sheet
-ss.getSheetByName("To PR").getRange(3,1,finalAppendedArrayList.length,finalAppendedArrayList[0].length).setValues(finalAppendedArrayList).sort({column: 2,ascending: true});
+  // Clear off the sheet to prep for new array result
+  if (getToPRLastRow-1 === 0){
+  } else {
+  ss.getSheetByName("To PR").getRange(3,1,getToPRLastRow-1,16).clearContent();
+  }
 
-// To reset the row heights to 21
-ss.getSheetByName("To PR").setRowHeightsForced(3,finalAppendedArrayList.length,21);
+  // Paste the final array to the To PR sheet
+  ss.getSheetByName("To PR").getRange(3,1,finalAppendedArrayList.length,finalAppendedArrayList[0].length).setValues(finalAppendedArrayList).sort({column: 2,ascending: true});
 
+  // To reset the row heights to 21
+  ss.getSheetByName("To PR").setRowHeightsForced(3,finalAppendedArrayList.length,21);
+
+
+  // var t2 = new Date().getTime();
+  // var timeDiff = t2 - t1;
+  // console.log(timeDiff); // 56598 ms before update, was reduced to 5285 ms after added breaks.
 
 }
 

@@ -1,5 +1,7 @@
 function getNewPR() {
 
+    // var t1 = new Date().getTime();
+
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const getOrderPRLastRow = ss.getSheetByName("Order PR").getLastRow();
     const getTblPRLastRow = ss.getSheetByName("tblPR").getLastRow();
@@ -25,7 +27,7 @@ function getNewPR() {
       }
     }
 
-//console.log(getNewPRList);
+  //console.log(getNewPRList);
 
     // Time stamp all inputs
     let stampUpAllItemsList = [];
@@ -59,6 +61,7 @@ function getNewPR() {
              getItemNameValue = getMasterList[c][1];
              getItemTypeValue = getMasterList[c][2];
              getVesaliusValue = getMasterList[c][9];
+             break; // New
 
             }
           }
@@ -101,8 +104,12 @@ function getNewPR() {
     // Clear off OrderPR table after entry - For now Num of Rows are manually added
     ss.getSheetByName("Order PR").getRange(2,4,116,2).clearContent();
 
-}
+    // var t2 = new Date().getTime();
+    // var timeDiff = t2 - t1;
+    // console.log(timeDiff); // 508 ms before update. Nope, no change after added break.
 
+
+}
 
 function getNewPRfromTOPR() {
 
@@ -159,6 +166,7 @@ function getNewPRfromTOPR() {
              getItemNameValue = getMasterList[c][1];
              getItemTypeValue = getMasterList[c][2];
              getVesaliusValue = getMasterList[c][9];
+             break; // New
 
             }
           }
@@ -206,7 +214,6 @@ function getNewPRfromTOPR() {
 
 }
 
-
 function getNewOrderFoc() {
 
     const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -236,7 +243,7 @@ function getNewOrderFoc() {
       }
     }
 
-//console.log(getNewFOCList);
+  //console.log(getNewFOCList);
 
     // Time stamp all inputs
     let stampUpAllItemsList = [];
@@ -270,6 +277,7 @@ function getNewOrderFoc() {
              getItemNameValue = getMasterList[c][1];
              getItemTypeValue = getMasterList[c][2];
              getVesaliusValue = getMasterList[c][9];
+             break; // New
 
             }
           }
@@ -290,26 +298,26 @@ function getNewOrderFoc() {
     for (d = 0; d < lookFromMasterList.length; d++) {
     resArrayListForNewFOC.push(appendArrays(
                 stampUpAllItemsList[d],       // Timestamp
-                'FOC'+getNewFOCList[d][1],           // Order no.
-                getNewFOCList[d][0],           // Item Code
+                'FOC'+getNewFOCList[d][1],    // Order no.
+                getNewFOCList[d][0],          // Item Code
                 lookFromMasterList[d][0],     // Item Name
                 lookFromMasterList[d][1],     // Item Type
                 lookFromMasterList[d][2],     // Vesalius Code
-                getNewFOCList[d][2],           // Quantity Ordered
-                '',                            // Empty Value
-                '',                            // Status
-                getNewFOCList[d][3]            // Remarks
+                getNewFOCList[d][2],          // Quantity Ordered
+                '',                           // Empty Value
+                '',                           // Status
+                getNewFOCList[d][3]           // Remarks
                 ));
 
     resArrayListForNewFOCPRPO.push(appendArrays(
                 stampUpAllItemsList[d],       // Timestamp
-                "FOC Order",                   // FOC Order
-                'FOC'+getNewFOCList[d][1],           // Order no.
-                getNewFOCList[d][0],           // Item Code
+                "FOC Order",                  // FOC Order
+                'FOC'+getNewFOCList[d][1],    // Order no.
+                getNewFOCList[d][0],          // Item Code
                 lookFromMasterList[d][0],     // Item Name
                 lookFromMasterList[d][1],     // Item Type
-                getNewFOCList[d][2],           // Quantity Ordered
-                getNewFOCList[d][3]            // Remarks
+                getNewFOCList[d][2],          // Quantity Ordered
+                getNewFOCList[d][3]           // Remarks
     ));
 
     }
@@ -370,7 +378,7 @@ function getNewPO() {
                                     searchThroughChoosenPRList[b][3],       // Item Name
                                     searchThroughChoosenPRList[b][4],       // Item Type
                                     searchThroughChoosenPRList[b][5],       // Quantity Ordered
-                                    "", //getPORemarksValue                       // PO Remarks
+                                    "", //getPORemarksValue                 // PO Remarks
             ]);
         }
       }
@@ -461,28 +469,28 @@ function getNewDO() {
 
 function getBestExp() {
 
-const ss = SpreadsheetApp.getActiveSpreadsheet(); 
-const getBestExpLastRow = ss.getSheetByName("BestExp").getLastRow();
+  const ss = SpreadsheetApp.getActiveSpreadsheet(); 
+  const getBestExpLastRow = ss.getSheetByName("BestExp").getLastRow();
 
-const getBatchNoValue = ss.getSheetByName("BestExp").getRange(1,2,1,1).getValue();
-const getTblBestExpLastRow = ss.getSheetByName("tblBestExp").getLastRow();
-const today = new Date();
+  const getBatchNoValue = ss.getSheetByName("BestExp").getRange(1,2,1,1).getValue();
+  const getTblBestExpLastRow = ss.getSheetByName("tblBestExp").getLastRow();
+  const today = new Date();
       const dateEachItemDay = today.getDate();
       const dateEachItemMonth = today.getMonth()+1;
       const dateEachItemYear = today.getFullYear();
       const dateEachItemHours = today.getHours();
       const dateEachItemMinutes = today.getMinutes();
       const dateEachItemSeconds = today.getSeconds();
-let time = `${dateEachItemMonth}/${dateEachItemDay}/${dateEachItemYear} ${dateEachItemHours}:${dateEachItemMinutes}:${dateEachItemSeconds}`;
+  let time = `${dateEachItemMonth}/${dateEachItemDay}/${dateEachItemYear} ${dateEachItemHours}:${dateEachItemMinutes}:${dateEachItemSeconds}`;
 
-let getNewBestExpArray = ss.getSheetByName("BestExp").getRange(4,1,getBestExpLastRow-3,8).getValues();
+  let getNewBestExpArray = ss.getSheetByName("BestExp").getRange(4,1,getBestExpLastRow-3,8).getValues();
 
-//console.log(getBatchNoValue);
-//console.log(getNewBestExpArray);
+  //console.log(getBatchNoValue);
+  //console.log(getNewBestExpArray);
 
-// Append all rows with expiry dates
-let getMatchedItemWithNewExp = [];
-for (k = 0; k < getNewBestExpArray.length; k++){
+  // Append all rows with expiry dates
+  let getMatchedItemWithNewExp = [];
+  for (k = 0; k < getNewBestExpArray.length; k++){
     if (getNewBestExpArray[k][6]){
         getMatchedItemWithNewExp.push([
           time,
@@ -498,18 +506,18 @@ for (k = 0; k < getNewBestExpArray.length; k++){
           '' // Remarks
         ])
     }
-}
-//console.log(getMatchedItemWithNewExp);
+  }
+  //console.log(getMatchedItemWithNewExp);
 
-// Paste the Best Exp List
-//(TO UPDATE ON LAST ROW PASTE)
-ss.getSheetByName("tblBestExp").getRange(getTblBestExpLastRow+1,1,getMatchedItemWithNewExp.length,getMatchedItemWithNewExp[0].length).setValues(getMatchedItemWithNewExp);
+  // Paste the Best Exp List
+  //(TO UPDATE ON LAST ROW PASTE)
+  ss.getSheetByName("tblBestExp").getRange(getTblBestExpLastRow+1,1,getMatchedItemWithNewExp.length,getMatchedItemWithNewExp[0].length).setValues(getMatchedItemWithNewExp);
 
-// To clear off the bestexp table
-ss.getSheetByName("BestExp").getRange(4,8,getBestExpLastRow-3,1).clearContent();
+  // To clear off the bestexp table
+  ss.getSheetByName("BestExp").getRange(4,8,getBestExpLastRow-3,1).clearContent();
 
-updateBestExp();
-// Successful message box after running the script
+  updateBestExp();
+  // Successful message box after running the script
 
 }
 
@@ -573,15 +581,15 @@ function getFinalisedBatchList() {
 
       ])
     }
-  }
-  //console.log(choosenBatchItemsArray);
+    }
+    //console.log(choosenBatchItemsArray);
 
-  // Paste the choosen Items into tblBatch sheet
-  ss.getSheetByName("tblBatch").getRange(getTblBatchLastRow+1,1,choosenBatchItemsArray.length,choosenBatchItemsArray[0].length).setValues(choosenBatchItemsArray);
-  ss.getSheetByName("tblBatch").getRange(getTblBatchLastRow+1,1,choosenBatchItemsArray.length,1).insertCheckboxes();
+    // Paste the choosen Items into tblBatch sheet
+    ss.getSheetByName("tblBatch").getRange(getTblBatchLastRow+1,1,choosenBatchItemsArray.length,choosenBatchItemsArray[0].length).setValues(choosenBatchItemsArray);
+    ss.getSheetByName("tblBatch").getRange(getTblBatchLastRow+1,1,choosenBatchItemsArray.length,1).insertCheckboxes();
 
-  // Clean up Batch List sheet
-  ss.getSheetByName("Batch List").getRange(4,1,getBATCHLISTLastRow-3,15).clearContent().removeCheckboxes();
+    // Clean up Batch List sheet
+    ss.getSheetByName("Batch List").getRange(4,1,getBATCHLISTLastRow-3,15).clearContent().removeCheckboxes();
 
 
 }
