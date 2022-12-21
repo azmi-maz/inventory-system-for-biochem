@@ -20,6 +20,7 @@ function incomingStock() {
   //console.log(copyToIncomingSheet);
   //console.log(getIncomingList);
   //console.log(getListCodeToMasterCode);
+  // console.log(getFullVerificationArray.length);
   
   //Goes through each array for incoming items
   let cleanedUpBarcodeList = [];
@@ -452,21 +453,47 @@ function incomingStock() {
 
   let countedUniqueLots = findUniqueLotNumbers[0];
 
+  // console.log(countedUniqueLots);
+
   let getNewLotsFromIncoming = [];
+  let getNewLotsFromIncomingForLeftOvers = [];
   for (b = 0; b < tblIncomingDisplayList.length; b++){
     getNewLotsFromIncoming.push(tblIncomingDisplayList[b][6]);
+    getNewLotsFromIncomingForLeftOvers.push(tblIncomingDisplayList[b][6]);
   }
-  //console.log(getNewLotsFromIncoming)
+  // console.log(getNewLotsFromIncoming);
 
-  let removeSameLots = findRemainingUniqueID(getNewLotsFromIncoming.sort(),countedUniqueLots.sort());
+  let cutTheIncomingListNewLot = countArrayElem(getNewLotsFromIncoming);
 
-  //console.log(removeSameLots)
+  let countedNewLotFromIncoming = cutTheIncomingListNewLot[0];
 
+  // console.log(countedNewLotFromIncoming);
+
+  let removeSameLots = findRemainingUniqueID(countedNewLotFromIncoming.sort(),countedUniqueLots.sort());
+
+  // console.log(removeSameLots);
+
+  let cutTheIncomingListSameLot = countArrayElem(getNewLotsFromIncomingForLeftOvers);
+
+  let countedSameLotFromIncoming = cutTheIncomingListSameLot[0];
+
+  // console.log(countedSameLotFromIncoming);
+
+  let leftOversFromRemoval = findRemainingUniqueID(countedSameLotFromIncoming.sort(),removeSameLots.sort());
+
+  // console.log(leftOversFromRemoval);
+
+  // New and unique lot numbers
   let findUniqueLotFromSameLotRemoval = countArrayElem(removeSameLots);
 
   let countedUniqueLotForPaste = findUniqueLotFromSameLotRemoval[0];
 
-  //console.log(countedUniqueLotForPaste);
+  // console.log(countedUniqueLotForPaste);
+
+  // Existing lot numbers but different shipment
+  let findSameLotButDifferentShipment = countArrayElem(leftOversFromRemoval);
+
+  let countedSameLotForPaste = findSameLotButDifferentShipment[0];
 
   // Clean up the incoming list with only reagents
   let cleanedUpIncomingForReagentsOnly = [];
@@ -481,15 +508,15 @@ function incomingStock() {
               ]);
     }
   }
-  //console.log(cleanedUpIncomingForReagentsOnly)
+  // console.log(cleanedUpIncomingForReagentsOnly)
 
   let findUniqueIncomingItems = countArrayElem(cleanedUpIncomingForReagentsOnly);
 
   let countedCleanedUpIncoming = findUniqueIncomingItems[0];
 
-  //console.log(countedCleanedUpIncoming[0])
+  // console.log(countedCleanedUpIncoming);
 
-  // Loop through original incoming list to expand
+  // Loop through original incoming list to expand FOR NEW AND UNIQUE LOT NUMBER
   let finalArrayForVerification = [];
   for (c = 0; c < countedUniqueLotForPaste.length; c++){
     for (d = 0; d < countedCleanedUpIncoming.length; d++){
@@ -514,11 +541,68 @@ function incomingStock() {
       }
     }
   }
-  //console.log(finalArrayForVerification)
+
+
+  // Loop through original incoming list to expand for SAME LOT BUT DIFFERENT SHIPMENT
+  let finalSameLotArrayForVerification = [];
+  for (c = 0; c < countedSameLotForPaste.length; c++){
+    for (d = 0; d < countedCleanedUpIncoming.length; d++){
+      if (countedSameLotForPaste[c] === countedCleanedUpIncoming[d].split(",")[2]){
+              
+              dateVal = countedCleanedUpIncoming[d].split(",")[3];
+              
+              finalSameLotArrayForVerification.push([
+                          countedCleanedUpIncoming[d].split(",")[0],                                 // Date
+                          countedCleanedUpIncoming[d].split(",")[1],                                 // Item Name
+                          countedCleanedUpIncoming[d].split(",")[2],                                 // Lot Number
+                          dateVal,                                                                   // Exp Date
+                          "",                                                                        // Current Lot Number
+                          "",                                                                        // Exp Date of current lot
+                          "",                                                                        // Date of verification
+                          "",                                                                        // Performed By
+                          "Balum",                                                                   // Status default
+                          "New Shipment",                                                                        // Remarks
+                          countedCleanedUpIncoming[d].split(",")[4],                                 // Item Code
+                          ""                                                                         // Available Kits 
+                          ]);
+      }
+    }
+  }
+
+  // Check for same lot but different shipment
+  if (finalSameLotArrayForVerification.length > 0){
+  updateInfo = `Reagent Lot-to-lot verification.`+ "\r\n" + "\r\n" + `There are ${finalSameLotArrayForVerification.length} reagent(s) with same lot number but different shipment.`+ "\r\n" +`Do you wish to add them to the verification table?`;
+
+  // To prompt user if the they want to add in same lot reagents to the verification table
+  const response = SpreadsheetApp.getUi().alert(updateInfo, SpreadsheetApp.getUi().ButtonSet.YES_NO);
+
+    if (response == SpreadsheetApp.getUi().Button.YES){
+      SpreadsheetApp.getUi().alert(`You clicked YES.`+ "\r\n" + "\r\n" +`They are added to the verification table.`);
+      // This appends the same lot new shipment array to the new and unique lot reagent array.
+      finalArrayForVerification = finalArrayForVerification.concat(finalSameLotArrayForVerification);
+
+    
+    } else {
+
+      SpreadsheetApp.getUi().alert(`You clicked NO.`+ "\r\n" + "\r\n" +`They are excluded from the verification table.`);
+
+    }
+
+
+  } else {}
+
+  //console.log(finalArrayForVerification);
+  //console.log(finalSameLotArrayForVerification);
   //console.log(tblUniqueINIDList);
   //console.log(tblIncomingDisplayList);
   //console.log(tblUniqueINIDList);
   //console.log(tblIncomingDisplayList);
+
+
+    // Paste to verification list
+    if (finalArrayForVerification.length === 0){
+    } else {ss.getSheetByName("Verification").getRange(getTblVerificationLastRow+1,1,finalArrayForVerification.length,finalArrayForVerification[0].length).setValues(finalArrayForVerification);
+    }
 
     // For tblUniqueINID - to make a list of all unique IDs
     ss.getSheetByName("tblUniqueINID").getRange(getTblUniqueINIDLastRow+1,1,tblUniqueINIDList.length,tblUniqueINIDList[0].length).setValues(tblUniqueINIDList);

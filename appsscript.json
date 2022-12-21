@@ -1,10 +1,17 @@
 {
   "timeZone": "Asia/Kuching",
-  "dependencies": {},
+  "dependencies": {
+  },
+  "webapp": {
+    "access": "MYSELF",
+    "executeAs": "USER_DEPLOYING"
+  },
   "exceptionLogging": "STACKDRIVER",
   "runtimeVersion": "V8",
-  "webapp": {
-    "executeAs": "USER_DEPLOYING",
-    "access": "MYSELF"
+  "sheets": {
+    "macros": [{
+      "menuName": "doGet",
+      "functionName": "doGet"
+    }]
   }
 }

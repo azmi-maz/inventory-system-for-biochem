@@ -94,7 +94,7 @@ function updateVerification() {
       }
     }
   }
-    //console.log(matchVerificationArray);
+    // console.log(matchVerificationArray);
     //console.log(lookForCritical)
     //console.log(statusUpdate)
 
