@@ -94,7 +94,7 @@ function lookForItemsBelowPar() {
          getItemTypeFromArray = countExtractListOfQOHWithAPMandTestPerKit[x][4];
          getQOHinBoxes = getQOHValue / getMultiCountFromArray;
          getQOHLastValue = getQOHValue / getMultiCountFromArray / getAPMValueFromArray;
-         break; // New
+         //break; // New
     }
     }
     countedQOHListWithQOHlastarray.push([
@@ -163,7 +163,7 @@ function lookForItemsBelowPar() {
                     qohPlusBOLastInDateFormat                  // QOH + BO in months date format
                     ]);
       resArrayForPendingBOJustItemCodes.push(countAllPendingBOBasedOnItemCodes[b][1]);
-      break; // New
+      //break; // New
 
 
     }
@@ -187,7 +187,7 @@ function lookForItemsBelowPar() {
         countAllPendingBOBasedOnItemCodes[b][2],    // Item Name
         countAllPendingBOBasedOnItemCodes[b][3]    // Pending BO in Boxes
       ]);
-      break; // New
+      //break; // New
     }
   }
   }
@@ -222,7 +222,7 @@ function lookForItemsBelowPar() {
                     qohLastInDateFormat,                                // QOH last in date
                     qohPlusBOLastInDateFormat                           // QOH + BO in months date format
                     ]);
-                    break; // New
+                    //break; // New
       }
     }
   }
@@ -293,7 +293,7 @@ function lookForItemsBelowPar() {
         fullArrayQOHandBO.push(
         concatResArrayForPendingBO[b][1]
         );
-        break; // New
+        //break; // New
   }
 
       if (findPRItemsOnly[a][0] === concatResArrayForPendingBO[b][1] &&
@@ -336,7 +336,7 @@ function lookForItemsBelowPar() {
               ]);
 
             ordQOHBOItemCodeLessPar.push(concatResArrayForPendingBO[b][1]);
-            break; // New
+            //break; // New
 
       } else
 
@@ -344,7 +344,7 @@ function lookForItemsBelowPar() {
           concatResArrayForPendingBO[b][7] > parlevel){
 
             ordQOHBOItemCodeMorePar.push(concatResArrayForPendingBO[b][1]);
-            break; // New
+            //break; // New
 
       }
     }
@@ -362,7 +362,7 @@ function lookForItemsBelowPar() {
         fullArrayQOH.push(
           countedQOHListWithQOHlastarray[b][0]
         );
-        break; // New
+        //break; // New
       }
     }
   }
@@ -420,12 +420,12 @@ function lookForItemsBelowPar() {
                         ]);
               
               ordQOHItemCodesLessPar.push(countedQOHListWithQOHlastarray[b][0]);
-              break; // New
+              //break; // New
 
         } else if (countedQOHListWithQOHlastarray[b][3] > parlevel){
 
               ordQOHItemCodesMorePar.push(countedQOHListWithQOHlastarray[b][0]);
-              break; // New
+              //break; // New
         }
       }
     } 
@@ -551,7 +551,7 @@ function lookForItemsBelowPar() {
                                                                  // Need to append Last PO value from a different array, length must match
                         findPRItemsOnly[c][9]                    // Company
                         ]);
-                        break; // New
+                        //break; // New
 
       }
     } 
