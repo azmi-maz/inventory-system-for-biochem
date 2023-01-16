@@ -49,13 +49,13 @@ function getUpdatedListCode() {
     
     if (getLength === 6 && getCompany === "Medicorp"){
     listCodeFormat = itemCodeFullListArray[findIndex][0].toString().substring(0,4)+"."+itemCodeFullListArray[findIndex][0].toString().substring(4,6);
-    findTheLastestListCode.push([a,getItemCodeList[a],listCodeFormat]);
+    findTheLastestListCode.push([getMasterIndex,getItemCodeList[a],listCodeFormat]);
     } else {
   }
   }
-  //console.log(findTheLastestListCode);
+  // console.log(findTheLastestListCode);
 
-  // Paste to MasterL
+  //Paste to MasterL
   for (a = 0; a < findTheLastestListCode.length; a++){
   ss.getSheetByName("MasterL").getRange(findTheLastestListCode[a][0]+2,12,1,1).setValue(findTheLastestListCode[a][2]);
   }
