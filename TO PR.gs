@@ -21,6 +21,7 @@ function lookForItemsBelowPar() {
     let getTblPRListArray = ss.getSheetByName("tblPR").getRange(2,1,getTblPRLastRow-1,10).getValues();
     let getListOfUniqueID = ss.getSheetByName("tblUniqueINID").getRange(2,1,getTblUniqueINIDLastRow-1,5).getValues();
     let getMasterList = ss.getSheetByName("MasterL").getRange(2,1,getMasterListLastRow-1,17).getValues();
+    // console.log(getListOfUniqueID.length);
 
         updateOUTGOING();
         //updatePRList here
@@ -30,11 +31,11 @@ function lookForItemsBelowPar() {
     let getTestPerKitValue = 0;
     let extractListOfQOH = [];
     let extractListOfQOHListForCount = [];
+    // console.log(listOfQOHSingleCount.length)
 
     // Count current QOH and look for APM and Test Per Kit
     for (t = 0; t < listOfQOHSingleCount.length; t++){
     for (u = 0; u < getListOfUniqueID.length; u++){
-        
         if (listOfQOHSingleCount[t] === getListOfUniqueID[u][0]){
         
         getItemCodeValueForLookUp = getListOfUniqueID[u][2];
@@ -51,8 +52,6 @@ function lookForItemsBelowPar() {
             
           }
         }
-      }
-    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -64,15 +63,19 @@ function lookForItemsBelowPar() {
             extractListOfQOHListForCount.push([
             getItemCodeValueForLookUp
             ])
+      }
     }
-  //console.log(extractListOfQOH)
+  }
+  // console.log(extractListOfQOH.length)
+  // console.log(remainingIDLeftForQOHList)
+  // console.log(extractListOfQOHListForCount.length)
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOHListForCount);
     let countExtractListOfQOH = countExtractListOfQOHElem[2];
     let countExtractListOfQOHWithAPMandTestPerKit = extractListOfQOH;
     
-    //console.log(countExtractListOfQOH);
+    // console.log(countExtractListOfQOH);
     //console.log(countExtractListOfQOHWithAPMandTestPerKit);
 
     // Calculate the QOHLAST of each current QOH items

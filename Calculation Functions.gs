@@ -35,7 +35,7 @@ function updateOUTGOING() {
     }
 
     //console.log(collectAllIncomingUniqueID);
-    //console.log(collectAllIncomingUniqueID.length);
+    // console.log(collectAllIncomingUniqueID.length);
 
     let collectAllOutgoingUniqueID = [];
 
@@ -43,12 +43,13 @@ function updateOUTGOING() {
       collectAllOutgoingUniqueID.push(getTblStockOUTarray[j][1]);
     }
 
-    //console.log(collectAllOutgoingUniqueID);
+    // console.log(collectAllOutgoingUniqueID.length);
 
     // Calculate the QOH using custom function
     remainingIDLeftForQOHList = findRemainingUniqueID(collectAllIncomingUniqueID.sort(), collectAllOutgoingUniqueID.sort());
-    //console.log(remainingIDLeftForQOHList[500]);
-    //console.log(collectAllIncomingUniqueID);
+    // //console.log(remainingIDLeftForQOHList[500]);
+    // console.log(remainingIDLeftForQOHList.length);
+    // console.log(collectAllIncomingUniqueID.length);
     //console.log(collectAllOutgoingUniqueID.length);
     //console.log(collectAllIncomingUniqueID[500]);
 
@@ -86,6 +87,7 @@ function updateOUTGOING() {
       }
     }
     // console.log('Length of array =', newUpdatedQOHFullList.length);
+    // console.log(newUpdatedQOHFullList);
 
     // Get a new list to update OUT_Alinity by the number of kits
     let newUpdatedQOHForStoreAlinity = [];
@@ -239,8 +241,9 @@ function updateQOHList(){
     let getFOCFilterValueFrom = ss.getSheetByName("QOH FOC").getRange(3,8,1,1).getValue();
     let getFOCFilterValueTo = ss.getSheetByName("QOH FOC").getRange(3,9,1,1).getValue();
 
-    //console.log(getListOfCurrentINIDarray);
+    // console.log(getListOfCurrentINIDarray.length);
     //console.log(getTblUniqueINIDLotNumbersarray);
+    // console.log(getTblUniqueINIDarray.length);
 
     // Expand on the CurrentID list
     let expandedListOfCurrentID = [];
@@ -292,7 +295,7 @@ function updateQOHList(){
       }
     }
     // console.log('Length of array =', expandedListOfCurrentID.length); // 2128
-    //console.log(listOfItemCodes)
+    // console.log(listOfItemCodes.length)
     //console.log(listOfItemCodesPlusLot);
 
     // To calculate the QOH based on current OUTGOING LIST
