@@ -1173,6 +1173,7 @@ function updateBatchList() {
     let getItemCodeValueForLookUp = '';
     let getAPMValue = 0;
     let getTestPerKitValue = 0;
+    let getMultiCountValue = 0;
     let extractListOfQOH = [];
     let extractListOfQOHListForCount = [];
     let getAcceptableQuantity = 0;
@@ -1197,8 +1198,6 @@ function updateBatchList() {
             
           }
         }
-      }
-    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -1209,6 +1208,8 @@ function updateBatchList() {
             extractListOfQOHListForCount.push([
             getItemCodeValueForLookUp
             ])
+      }
+    }
     }
   // console.log(extractListOfQOH.length)
 
@@ -1217,7 +1218,7 @@ function updateBatchList() {
     let countExtractListOfQOH = countExtractListOfQOHElem[2];
     let countExtractListOfQOHWithAPMandTestPerKit = extractListOfQOH;
     
-    //console.log(countExtractListOfQOH);
+    // console.log(countExtractListOfQOH);
     //console.log(countExtractListOfQOHWithAPMandTestPerKit);
 
     // Calculate the QOHLAST of each current QOH items

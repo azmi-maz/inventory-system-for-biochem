@@ -47,8 +47,6 @@ function updateNameSheet() {
             
           }
         }
-      }
-    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             getAPMValue,
@@ -60,8 +58,10 @@ function updateNameSheet() {
             extractListOfQOHListForCount.push([
             getItemCodeValueForLookUp
             ])
+      }
     }
-  //console.log(extractListOfQOH)
+    }
+  // console.log(extractListOfQOH.length)
 
     // Take extractListOfQOH and count each item
     let countExtractListOfQOHElem = countArrayElem(extractListOfQOHListForCount);

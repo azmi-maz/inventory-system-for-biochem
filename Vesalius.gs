@@ -36,14 +36,14 @@ function collectVesalius() {
             
           }
         }
-      }
-    }
             extractListOfQOH.push([
             getItemCodeValueForLookUp,
             ])
+      }
+    }
 
     }
-  //console.log(extractListOfQOH[0])
+  // console.log(extractListOfQOH.length)
 
     let cleanedgetMasterListJustCodes = [];
     for (a= 0; a < getMasterJustCodeList.length; a++){
