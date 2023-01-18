@@ -1,5 +1,5 @@
 function styleStoreSheet() {
- 
+
   const spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('A:A').activate();
   spreadsheet.getActiveSheet().setColumnWidth(1, 49);
@@ -107,7 +107,7 @@ function styleStoreSheet() {
 }
 
 function styleStoreSheetReadableHeight() {
- 
+
   const spreadsheet = SpreadsheetApp.getActive();
   spreadsheet.getRange('1:1').activate();
   spreadsheet.getActiveSheet().setRowHeight(1, 25);
