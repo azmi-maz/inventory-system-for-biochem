@@ -178,7 +178,6 @@ function updateOUTGOING() {
   // var t2 = new Date().getTime();
   // var timeDiff = t2 - t1;
   // console.log(timeDiff); // 2522 ms before update. Seems like no change when added breaks.
-
 }
 
 function updateOUTGOINGpaste() {

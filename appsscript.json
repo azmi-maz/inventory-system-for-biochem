@@ -12,6 +12,9 @@
     "macros": [{
       "menuName": "doGet",
       "functionName": "doGet"
+    }, {
+      "menuName": "occurrences",
+      "functionName": "occurrences"
     }]
   }
 }

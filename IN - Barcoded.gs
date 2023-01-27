@@ -107,7 +107,7 @@ function incomingStock() {
       finalListCode = '9P4240';
 
       // 5.1th condition to handle Techno WBT items with 2 occurrences of 240
-    } else if (lookForTechnoWBT === '4S1610' & count240InString === 2) {
+    } else if (lookForTechnoWBT === '4S1610' && count240InString === 2) {
 
       finalListCode = lookForTechnoWBT.toUpperCase();
 
