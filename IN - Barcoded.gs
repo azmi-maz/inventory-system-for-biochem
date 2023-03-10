@@ -17,10 +17,19 @@ function incomingStock() {
 
   let getFullVerificationArray = ss.getSheetByName("Verification").getRange(2, 1, getTblVerificationLastRow - 1, 12).getValues();
 
+  // PASTE PART ONE HERE -----------------------------------------------------------------------------------
+
+
+  // END OF PART ONE ---------------------------------------------------------------------------------------
+
   //console.log(copyToIncomingSheet);
   //console.log(getIncomingList);
   //console.log(getListCodeToMasterCode);
-  // console.log(getFullVerificationArray.length);
+  //console.log(getFullVerificationArray.length);
+
+
+
+  // REPLACE THIS WHOLE PART WITH PART TWO -----------------------------------------------------------------
 
   //Goes through each array for incoming items
   let cleanedUpBarcodeList = [];
@@ -297,6 +306,14 @@ function incomingStock() {
     resExpDateList.push([newDateValue]);
 
   }
+
+
+
+
+  // END OF PART TWO ---------------------------------------------------------------------------------------
+
+
+
 
   //console.log(cleanedUpBarcodeList);
   //console.log(resLotNumberList);
